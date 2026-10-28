@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NZ Election Tracker 2026</title>
+<meta name="description" content="Every 2026 New Zealand poll on one trend line with each pollster's lean taken out, simulated seats including overhangs, and the chance each side can form a government.">
+<meta property="og:title" content="NZ Election Tracker 2026">
+<meta property="og:description" content="Every poll on one trend line, each pollster's lean taken out, and the chance each side can form a government.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121316" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/source-serif-4-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="nz">
+  <header class="nz-head" id="top">
+    <p class="nz-kicker">New Zealand general election · Saturday 7 November</p>
+    <h1 class="nz-title">NZ Election Tracker 2026</h1>
+    <p class="nz-take dash-skeleton" id="takeaway">
+      <span data-tk="luxon" hidden>Luxon is favoured to stay prime minister, whichever way Opportunity goes.</span>
+      <span data-tk="lean_l" hidden>Luxon is narrowly ahead, whichever way Opportunity goes.</span>
+      <span data-tk="hipkins" hidden>Hipkins is favoured to become prime minister, whichever way Opportunity goes.</span>
+      <span data-tk="lean_h" hidden>Hipkins is narrowly ahead, whichever way Opportunity goes.</span>
+      <span data-tk="split_h" hidden>Too close to call, and it turns on Opportunity. On what the leaders have said, Hipkins is more likely to govern (<b data-draw="n" data-source="chances" data-field="chance" data-where="view=stated&amp;outcome=Hipkins-led" data-fmt="pct">—</b>). If Opportunity would also deal with National, Luxon is (<b data-draw="n" data-source="chances" data-field="chance" data-where="view=open&amp;outcome=Luxon-led" data-fmt="pct">—</b>).</span>
+      <span data-tk="close" hidden>Neither side is clearly ahead.</span>
+    </p>
+    <p class="nz-meta">Every published poll on one trend line for each party, with each pollster's lean taken out, then <span data-draw="n" data-source="summary" data-field="value" data-where="metric=simulations" data-fmt="int">—</span> simulated elections. Updated <span data-draw="n" data-source="summary" data-field="value" data-where="metric=updated" data-fmt="text">—</span> from <span data-draw="n" data-source="summary" data-field="value" data-where="metric=polls_count" data-fmt="int">—</span> polls.</p>
+    <nav class="nz-tabs" role="tablist" aria-label="Sections">
+      <button type="button" role="tab" data-tab="outlook" aria-selected="true">Outlook</button>
+      <button type="button" role="tab" data-tab="seats" aria-selected="false">Seats</button>
+      <button type="button" role="tab" data-tab="polls" aria-selected="false">Polls</button>
+      <button type="button" role="tab" data-tab="betting" aria-selected="false">Betting</button>
+      <button type="button" role="tab" data-tab="method" aria-selected="false">How it works</button>
+    </nav>
+  </header>
+
+  <section id="outlook" class="nz-panel" role="tabpanel" data-panel>
+    <div class="nz-card" id="govern">
+      <h2>Who can form a government</h2>
+      <p class="nz-note">Share of <span data-draw="n" data-source="summary" data-field="value" data-where="metric=simulations" data-fmt="int">—</span> simulated elections in which each side has the seats to govern.</p>
+      <div class="gb-rows">
+        <div class="gb-row">
+          <p class="gb-label">On stated positions<small>Opportunity can only back Hipkins, since Luxon and Peters have ruled it out</small></p>
+          <div class="nz-chart ch-gb dash-skeleton" id="gb-stated" data-draw="govbar" data-view="stated" data-source="chances"></div>
+        </div>
+        <div class="gb-row">
+          <p class="gb-label">If Opportunity is open to both sides<small>It talks first to whichever of National and Labour has more seats</small></p>
+          <div class="nz-chart ch-gb dash-skeleton" id="gb-open" data-draw="govbar" data-view="open" data-source="chances"></div>
+        </div>
+        <div class="gb-row">
+          <p class="gb-label">On stated positions, without National's extra electorate seats<small>Shows how much rides on the overhang</small></p>
+          <div class="nz-chart ch-gb dash-skeleton" id="gb-nooverhang" data-draw="govbar" data-view="no_overhang" data-source="chances"></div>
+        </div>
+      </div>
+      <p class="nz-legend"><span class="item"><span class="nz-sw" style="--c:var(--p-NAT)"></span>Luxon-led</span><span class="item"><span class="nz-sw"></span>No clear majority</span><span class="item"><span class="nz-sw" style="--c:var(--p-LAB)"></span>Hipkins-led</span></p>
+    </div>
+
+    <div class="nz-tiles">
+      <div class="nz-card nz-tile" id="tile-nat">
+        <p class="t-label"><span class="nz-sw" style="--c:var(--p-NAT)"></span><span>National, party vote today</span></p>
+        <p class="t-num"><span data-draw="n" data-source="eday" data-field="now" data-where="party=NAT" data-fmt="share" data-fetchpriority="high">—</span></p>
+        <p class="t-sub">Election-day estimate <b data-draw="n" data-source="eday" data-field="vote_mid" data-where="party=NAT" data-fmt="share">—</b> (<span data-draw="n" data-source="eday" data-field="vote_lo" data-where="party=NAT" data-fmt="dec1">—</span>–<span data-draw="n" data-source="eday" data-field="vote_hi" data-where="party=NAT" data-fmt="dec1">—</span>)</p>
+      </div>
+      <div class="nz-card nz-tile" id="tile-lab">
+        <p class="t-label"><span class="nz-sw" style="--c:var(--p-LAB)"></span><span>Labour, party vote today</span></p>
+        <p class="t-num"><span data-draw="n" data-source="eday" data-field="now" data-where="party=LAB" data-fmt="share" data-fetchpriority="high">—</span></p>
+        <p class="t-sub">Election-day estimate <b data-draw="n" data-source="eday" data-field="vote_mid" data-where="party=LAB" data-fmt="share">—</b> (<span data-draw="n" data-source="eday" data-field="vote_lo" data-where="party=LAB" data-fmt="dec1">—</span>–<span data-draw="n" data-source="eday" data-field="vote_hi" data-where="party=LAB" data-fmt="dec1">—</span>)</p>
+      </div>
+      <div class="nz-card nz-tile" id="tile-top">
+        <p class="t-label"><span class="nz-sw" style="--c:var(--p-OPP)"></span><span>Chance Opportunity clears <span data-draw="k" data-k="threshold" data-fmt="share0">—</span></span></p>
+        <p class="t-num"><span data-draw="n" data-source="summary" data-field="value" data-where="metric=opp_over5" data-fmt="pct">—</span></p>
+        <p class="t-sub">Party vote today <b data-draw="n" data-source="eday" data-field="now" data-where="party=OPP" data-fmt="share">—</b></p>
+      </div>
+      <div class="nz-card nz-tile" id="tile-overhang">
+        <p class="t-label"><span class="nz-sw" style="--c:var(--p-NAT)"></span><span>Chance National wins extra seats</span></p>
+        <p class="t-num"><span data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_overhang_p" data-fmt="pct">—</span></p>
+        <p class="t-sub">More electorates than its party vote earns, by <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_overhang_mean" data-fmt="dec1">—</b> seats on average</p>
+      </div>
+    </div>
+
+    <div class="nz-card" id="worm">
+      <h2>The worm</h2>
+      <p class="nz-note">Poll average for each party with a <span data-draw="k" data-k="band" data-fmt="pct">—</span> band, run on to election day. Dots are single polls. The dashed line is the <span data-draw="k" data-k="threshold" data-fmt="share0">—</span> threshold; the shaded strip runs from today to election day.</p>
+      <div class="nz-ctrls">
+        <div class="nz-seg" role="group" aria-label="Time range"><button type="button" data-set="range=all">Since 2023 election</button><button type="button" data-set="range=12m">12 months</button><button type="button" data-set="range=3m">3 months</button></div>
+        <div class="nz-seg" role="group" aria-label="Poll dots"><button type="button" data-set="pollview=adjusted">Lean removed</button><button type="button" data-set="pollview=published">As published</button></div>
+      </div>
+      <div class="nz-chart ch-worm dash-skeleton" id="worm-chart" data-draw="worm" data-source="trend polls eday"></div>
+    </div>
+
+    <div class="nz-card" id="history">
+      <h2>How the chances have moved</h2>
+      <p class="nz-note">Each point re-runs the tracker on the polls that were out at the time: weekly from June, then each morning.</p>
+      <div class="nz-ctrls">
+        <div class="nz-seg" role="group" aria-label="View"><button type="button" data-set="hv=stated">Stated positions</button><button type="button" data-set="hv=open">Opportunity open to both</button></div>
+      </div>
+      <div class="nz-chart ch-hist dash-skeleton" id="history-chart" data-draw="hist" data-source="history"></div>
+    </div>
+  </section>
+
+  <section id="seats" class="nz-panel" role="tabpanel" data-panel hidden>
+    <div class="nz-grid">
+      <div class="nz-card" id="party-seats">
+        <h2>Seats each party wins</h2>
+        <p class="nz-note">Most likely number, with the range that covers <span data-draw="k" data-k="band" data-fmt="pct">—</span> of simulations.</p>
+        <div class="nz-chart ch-seats dash-skeleton" id="seats-chart" data-draw="seats" data-source="eday"></div>
+        <p class="nz-note">National wins the most seats in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_most_seats" data-fmt="pct">—</b> of simulations and Labour in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=lab_most_seats" data-fmt="pct">—</b>, yet National beats Labour on the party vote in only <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_more_votes" data-fmt="pct">—</b>. Its electorate seats make the difference.</p>
+      </div>
+      <div class="nz-card" id="blocs">
+        <h2>Can either side get to a majority?</h2>
+        <p class="nz-note">Most likely seats for each side. The whisker covers <span data-draw="k" data-k="band" data-fmt="pct">—</span> of simulations; the dashed line is the most likely majority, <b data-draw="n" data-source="summary" data-field="value" data-where="metric=maj_mid" data-fmt="int">—</b> seats.</p>
+        <div class="bloc-row">
+          <p class="bloc-label">National, ACT and NZ First</p>
+          <div class="nz-chart ch-bloc dash-skeleton" id="bloc-right" data-draw="bloc" data-side="right" data-source="summary"></div>
+        </div>
+        <div class="bloc-row">
+          <p class="bloc-label">Labour, Greens and Te Pāti Māori, with Opportunity on top</p>
+          <div class="nz-chart ch-bloc dash-skeleton" id="bloc-left" data-draw="bloc" data-side="left" data-source="summary"></div>
+        </div>
+        <p class="nz-note">National, ACT and NZ First have a majority on their own in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=right_alone" data-fmt="pct">—</b> of simulations; Labour, the Greens and Te Pāti Māori in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=left_alone" data-fmt="pct">—</b>. In <b data-draw="n" data-source="summary" data-field="value" data-where="metric=opp_decides" data-fmt="pct">—</b>, Opportunity's seats decide it.</p>
+      </div>
+    </div>
+
+    <div class="nz-card" id="votes">
+      <h2>Party vote on election day</h2>
+      <p class="nz-note">Today's trend, then the election-day estimate, which adds what past polls have missed. Low and high cover <span data-draw="k" data-k="band" data-fmt="pct">—</span> of simulations.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-votes" data-source="eday" data-row-key="party" data-need="vote_mid" data-sort="vote_mid:desc">
+          <thead><tr><th data-field="name">Party</th><th data-field="now" data-fmt="share">Today</th><th data-field="vote_mid" data-fmt="share">Election day</th><th data-field="vote_lo" data-fmt="share">Low</th><th data-field="vote_hi" data-fmt="share">High</th><th data-field="seats_mid" data-fmt="int">Seats</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nz-grid">
+      <div class="nz-card" id="parliament">
+        <h2>How big parliament could be</h2>
+        <p class="nz-note">Most likely <b data-draw="n" data-source="summary" data-field="value" data-where="metric=total_mid" data-fmt="int">—</b> seats (<span data-draw="n" data-source="summary" data-field="value" data-where="metric=total_lo" data-fmt="int">—</span>–<span data-draw="n" data-source="summary" data-field="value" data-where="metric=total_hi" data-fmt="int">—</span>). Overhang seats add to the usual total, which lifts the number needed for a majority.</p>
+        <div class="nz-chart ch-parl dash-skeleton" id="parliament-chart" data-draw="parl" data-source="parliament summary"></div>
+      </div>
+      <div class="nz-card" id="overhang">
+        <h2>The overhang</h2>
+        <p class="nz-text">National is on track to win <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_elec_mid" data-fmt="int">—</b> electorates (<span data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_elec_lo" data-fmt="int">—</span>–<span data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_elec_hi" data-fmt="int">—</span>). In <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_overhang_p" data-fmt="pct">—</b> of simulations that is more seats than its party vote earns. It keeps the extra seats, <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_overhang_mean" data-fmt="dec1">—</b> on average, and parliament grows.</p>
+        <p class="nz-text">Te Pāti Māori does the same in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=tpm_overhang_p" data-fmt="pct">—</b> of simulations, by <b data-draw="n" data-source="summary" data-field="value" data-where="metric=tpm_overhang_mean" data-fmt="dec1">—</b> seats on average.</p>
+        <p class="nz-text">It matters. On stated positions Luxon's chance is <b data-draw="n" data-source="chances" data-field="chance" data-where="view=stated&amp;outcome=Luxon-led" data-fmt="pct">—</b> with National's extra seats and <b data-draw="n" data-source="chances" data-field="chance" data-where="view=no_overhang&amp;outcome=Luxon-led" data-fmt="pct">—</b> without them.</p>
+      </div>
+    </div>
+
+    <div class="nz-card" id="maori">
+      <h2>Māori electorates</h2>
+      <p class="nz-note">Chance each party wins the seat. No seat polls are published here, so these are the tracker's own judgement from the 2023 results, this year's candidates and local reporting, moved together with Te Pāti Māori's party vote.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-maori" data-source="maori" data-row-key="seat">
+          <thead><tr><th data-field="seat">Electorate</th><th data-field="TPM" data-fmt="pct">Te Pāti Māori</th><th data-field="LAB" data-fmt="pct">Labour</th><th data-field="GRN" data-fmt="pct">Greens</th><th data-field="TTT" data-fmt="pct">Te Tai Tokerau Party</th><th data-field="IND" data-fmt="pct">Independent</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nz-card" id="close-seats">
+      <h2>General electorates in play</h2>
+      <p class="nz-note">Seats where National's chance of winning is between <span data-draw="k" data-k="close_lo" data-fmt="pct">—</span> and <span data-draw="k" data-k="close_hi" data-fmt="pct">—</span>. Each starts from its 2023 result and moves with the swing between National and Labour; a published local poll is blended in.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-close" data-source="close_seats" data-row-key="seat">
+          <thead><tr><th data-field="seat">Electorate</th><th data-field="held_2023">Won in 2023 by</th><th data-field="national_chance" data-fmt="pct">National's chance</th><th data-field="local_poll">Local poll</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="polls" class="nz-panel" role="tabpanel" data-panel hidden>
+    <div class="nz-card" id="latest">
+      <h2>Latest polls</h2>
+      <p class="nz-note">Party vote as published, before any lean is taken out. Where a sample size was not published, the tracker assumes <span data-draw="k" data-k="default_n" data-fmt="int">—</span>.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-latest" data-source="latest" data-row-key="poll">
+          <thead><tr><th data-field="pollster">Pollster</th><th data-field="fieldwork">Fieldwork</th><th data-field="sample" data-fmt="int">Sample</th><th data-field="NAT" data-fmt="num">Nat</th><th data-field="LAB" data-fmt="num">Lab</th><th data-field="GRN" data-fmt="num">Grn</th><th data-field="NZF" data-fmt="num">NZF</th><th data-field="ACT" data-fmt="num">ACT</th><th data-field="OPP" data-fmt="num">TOP</th><th data-field="TPM" data-fmt="num">TPM</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="nz-card" id="leans">
+      <h2>How each pollster leans</h2>
+      <p class="nz-note">Points each pollster runs above (+) or below (−) the others for each party, with recent polls counting more. These are taken out before a poll goes into the trend. Pollsters with few recent polls are pulled towards zero.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-leans" data-source="leans_wide" data-row-key="pollster">
+          <thead><tr><th data-field="pollster">Pollster</th><th data-field="NAT" data-fmt="signed">Nat</th><th data-field="LAB" data-fmt="signed">Lab</th><th data-field="GRN" data-fmt="signed">Grn</th><th data-field="NZF" data-fmt="signed">NZF</th><th data-field="ACT" data-fmt="signed">ACT</th><th data-field="OPP" data-fmt="signed">TOP</th><th data-field="recent_polls" data-fmt="int">Recent polls</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="betting" class="nz-panel" role="tabpanel" data-panel hidden>
+    <div class="nz-card" id="markets">
+      <h2>Betting and prediction markets</h2>
+      <p class="nz-text">Kept apart from the forecast and never blended into it. A price counts here only if it is a bookmaker's fixed-odds price, with the bookmaker's margin taken out, or a prediction market or exchange with at least <b data-draw="k" data-k="min_traded" data-fmt="usd">—</b> traded and no more than <b data-draw="k" data-k="max_gap" data-fmt="int">—</b> cents between the buy and sell price.</p>
+      <p class="nz-text" data-mk="none" hidden>Nothing checked passes that test yet, so there is no market price to set against the tracker. The thin markets are listed so you can see what people are posting, but they are not used.</p>
+      <p class="nz-text" data-mk="some" hidden><b data-draw="n" data-source="market_count" data-field="counted" data-fmt="int">—</b> of the markets checked pass that test and are marked as counted below. The rest are listed but not used.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-markets" data-source="markets" data-row-key="market,venue">
+          <thead><tr><th data-field="market">Market</th><th data-field="venue">Where</th><th data-field="reading">Reading</th><th data-field="traded_usd" data-fmt="usd">Traded</th><th data-field="counted">Counted</th><th data-field="reason">Why</th><th data-field="checked" data-fmt="date">Checked</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="method" class="nz-panel" role="tabpanel" data-panel hidden>
+    <div class="nz-card" id="how">
+      <h2>How the tracker works</h2>
+      <ol class="nz-steps">
+        <li><h3>Every poll goes in</h3><p>All published party-vote polls since the 2023 election: 1News-Verian, RNZ-Reid Research, Taxpayers' Union-Curia, Roy Morgan, Talbot Mills, The Post-Freshwater and Anacta. A poll is placed at the middle of its fieldwork, and bigger samples count for a little more.</p></li>
+        <li><h3>Each pollster's lean comes out</h3><p>Every pollster runs a little high or low for some parties. The tracker measures each one against the others over the past 16 months, with recent polls counting more, and takes it out. The middle is set mainly by 1News-Verian, RNZ-Reid Research and Curia, with the others counting for a little less, so no single pollster decides where the line sits.</p></li>
+        <li><h3>One line per party</h3><p>Each party's support is treated as something that drifts from day to day. The tracker draws the line that best fits every poll at once, and how fast a party's support has really been moving decides how hard one new poll can pull the line. The band shows how sure it is.</p></li>
+        <li><h3>Allowing for the polls being wrong together</h3><p>In 2017, 2020 and 2023 the final polls as a group missed some parties by a few points, and the Greens tended to poll above their result. The election-day estimates build in misses of that size, shared by every pollster, plus a small correction for the Greens. A miss for National tends to come with the opposite miss for Labour.</p></li>
+        <li><h3>Running the election</h3><p>The tracker then runs the election <span data-draw="n" data-source="summary" data-field="value" data-where="metric=simulations" data-fmt="int">—</span> times. Each run draws a party vote for every party, settles the electorates, applies the <span data-draw="k" data-k="threshold" data-fmt="share0">—</span> threshold (a party that wins an electorate is in regardless), shares out the seats with the Sainte-Laguë formula the Electoral Commission uses, and keeps any overhang seats.</p></li>
+        <li><h3>Electorates</h3><p>Each general electorate starts from its 2023 result and moves with the national swing between National and Labour, with room for local surprises. Where a local poll has been published (Hutt South, Ōtaki, Waitaki, West Coast-Tasman, Mount Albert, Auckland Central) it is blended in. Auckland Central is treated as National against the Greens. The Māori electorates use the tracker's own judgement, since no seat polls are published there.</p></li>
+        <li><h3>Who can govern</h3><p>National, ACT and NZ First are counted as one side; Labour, the Greens and Te Pāti Māori as the other. Luxon and Peters have both ruled out working with Opportunity, so on stated positions Opportunity can only help Hipkins. The second view relaxes that: Opportunity talks first to whichever of National and Labour has more seats. The third view is the first with National's extra electorate seats taken away, to show how much rides on them.</p></li>
+        <li><h3>What it cannot see</h3><p>A late swing after the last polls, a big change in who turns out, and coalition talks that break from what the leaders have said. The electorate part is the simplest piece: it works from 2023 margins, and the redrawn boundaries for this election move some seats in ways it only roughly allows for.</p></li>
+      </ol>
+    </div>
+    <div class="nz-card" id="sources">
+      <h2>Sources</h2>
+      <ul class="nz-links">
+        <li><a href="https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_New_Zealand_general_election" target="_blank" rel="noopener">Opinion polling for the 2026 New Zealand general election</a>, checked against each pollster's release as reported by 1News, RNZ, The Post, the Taxpayers' Union, Roy Morgan and Talbot Mills.</li>
+        <li><a href="https://www.electionresults.govt.nz/electionresults_2023/" target="_blank" rel="noopener">2023 general election official results</a>, Electoral Commission.</li>
+        <li>Market prices from the Polymarket and Kalshi market pages, on the date shown against each.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="nz-foot">
+    <p>Built by Claude for Cam Rodger from every published poll. The model re-runs each morning until election day. Not affiliated with any party, pollster or media outlet. Betting and prediction markets are shown on their own tab and never feed the forecast.</p>
+  </footer>
+</div>
+
+<script src="assets/d3.min.js"></script>
+<script src="assets/dash.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>
