@@ -27,7 +27,7 @@ NDAYS = (EDAY - T0).days
 # Weights reflect track record at the 2017-2023 elections and whether the
 # poll is commissioned by a party or released selectively.
 ANCHOR_W = {"Verian": 1.0, "Reid": 1.0, "Curia": 1.0, "Freshwater": 0.8,
-            "Roy Morgan": 0.5, "Talbot Mills": 0.6, "Anacta": 0.6}
+            "Roy Morgan": 0.5, "Anacta": 0.6}  # Anacta is Talbot Mills renamed (from Sept 2026)
 LEAN_WINDOW_DAYS = 480                    # leans estimated on the last ~16 months, recent polls weighted most
 LEAN_HALF = 180                           # days for a poll's weight in the lean estimate to fall by ~63%
 DEFF = 1.5                                # design effect on top of pure sampling error
@@ -138,39 +138,64 @@ def fit_party(df, party, iters=12):
 
 
 # ---------------------------------------------------------------- electorates
-# 2023 general electorates: margin of National over Labour (percentage points,
-# majority / ~380 votes per point). Positive = National ahead.
+# General electorates on the 2025 boundaries: notional 2023 margin of National
+# over Labour (percentage points). Positive = National ahead.
+# Notional figures for the four seats that changed hands on paper (Waitakere,
+# Henderson, Wigram, Wellington North) are The Tally Room's (tallyroom.com.au/62140);
+# Kapiti and Kenepuru are the tracker's own estimates from their parts; seats whose
+# boundaries moved a lot (Hutt South, Maungakiekie, Mount Roskill, Christchurch
+# Central, Palmerston North, Mount Albert) are adjusted in the direction The Spinoff's
+# area-by-area figures point; Port Waikato uses the party vote (Labour sat out the
+# 2023 by-election). Everything else carries its 2023 margin (majority / ~380 votes).
 NAT_HELD = {
-    "Banks Peninsula": 1.0, "Bay of Plenty": 40.5, "Botany": 43.0, "Coromandel": 44.8,
-    "East Coast": 8.2, "East Coast Bays": 53.6, "Hamilton East": 13.3, "Hamilton West": 17.1,
-    "Hutt South": 3.5, "Ilam": 25.0, "Invercargill": 26.0, "Kaikoura": 30.0,
-    "Kaipara ki Mahurangi": 51.2, "Maungakiekie": 12.2, "Mount Roskill": 4.1, "Napier": 23.3,
-    "New Lynn": 2.7, "New Plymouth": 18.4, "North Shore": 43.0, "Northcote": 24.4,
-    "Northland": 16.0, "Otaki / Kapiti": 16.5, "Pakuranga": 49.2, "Papakura": 35.4,
-    "Port Waikato": 40.0, "Rangitata": 28.5, "Rangitikei": 25.8, "Rotorua": 23.5,
-    "Selwyn": 52.1, "Southland": 45.3, "Takanini": 23.1, "Taranaki-King Country": 37.8,
-    "Taupo": 43.4, "Tauranga": 24.7, "Tukituki": 26.6, "Upper Harbour": 29.5,
-    "Waikato": 47.5, "Waimakariri": 34.2, "Wairarapa": 7.4, "Waitaki": 32.0,
-    "West Coast-Tasman": 2.7, "Whanganui": 14.3, "Whangaparaoa": 61.5, "Whangarei": 30.1,
+    "Banks Peninsula": 1.0, "Mount Maunganui": 40.5, "Botany": 43.0, "Coromandel": 44.8,
+    "East Cape": 8.2, "East Coast Bays": 53.6, "Hamilton East": 13.3, "Hamilton West": 17.1,
+    "Henderson": 2.4, "Hutt South": 2.5, "Ilam": 25.0, "Invercargill": 26.0, "Kaikoura": 30.0,
+    "Kaipara ki Mahurangi": 51.2, "Kapiti": 14.0, "Maungakiekie": 9.5, "Mount Roskill": 6.0,
+    "Napier": 23.3, "New Plymouth": 18.4, "North Shore": 43.0, "Northcote": 24.4,
+    "Northland": 16.0, "Pakuranga": 49.2, "Papakura": 35.4, "Port Waikato": 30.0,
+    "Rangitata": 28.5, "Rangitikei": 25.8, "Rotorua": 23.5, "Selwyn": 50.0, "Southland": 45.3,
+    "Takanini": 23.1, "Taranaki-King Country": 37.8, "Taupo": 43.4, "Tauranga": 24.7,
+    "Tukituki": 26.6, "Upper Harbour": 29.5, "Waikato": 47.5, "Waimakariri": 34.2,
+    "Wairarapa": 7.4, "Waitaki": 32.0, "West Coast-Tasman": 2.7, "Whanganui": 14.3,
+    "Whangaparaoa": 61.5, "Whangarei": 30.1, "Wigram": 7.2,
 }
 LAB_HELD = {
-    "Christchurch Central": -5.2, "Christchurch East": -6.3, "Dunedin": -21.0, "Kelston": -11.6,
-    "Mana": -19.4, "Mangere": -30.8, "Manurewa": -18.7, "Mount Albert": -0.05, "Nelson": -0.07,
-    "Ohariu": -3.3, "Palmerston North": -8.1, "Panmure-Otahuhu": -21.0, "Remutaka": -23.3,
-    "Taieri": -3.8, "Te Atatu": -0.3, "Wigram": -3.1,
+    "Christchurch Central": -8.0, "Christchurch East": -6.3, "Dunedin": -21.0, "Glendene": -11.6,
+    "Kenepuru": -15.0, "Mangere": -30.8, "Manurewa": -18.7, "Mount Albert": -0.3, "Nelson": -0.07,
+    "Otahuhu": -21.0, "Palmerston North": -6.5, "Remutaka": -23.3, "Taieri": -3.8, "Waitakere": -0.9,
+}
+# Candidate changes since 2023 (points added to National's margin): about two points
+# off a party whose MP is standing down, and a smaller lift for National MPs first
+# elected in 2023 who face no former MP this time.
+STANDING_DOWN = 2.0
+FIRST_TERM = 1.5
+CANDIDATE_ADJ = {
+    "Kaipara ki Mahurangi": -STANDING_DOWN, "Papakura": -STANDING_DOWN, "Port Waikato": -STANDING_DOWN,
+    "Whangarei": -STANDING_DOWN, "Waitakere": -STANDING_DOWN, "West Coast-Tasman": -STANDING_DOWN,
+    "Christchurch Central": STANDING_DOWN, "Wigram": STANDING_DOWN,
+    **{k: FIRST_TERM for k in ["East Cape", "Takanini", "Whanganui", "New Plymouth", "Napier", "Ilam",
+                                "Tukituki", "Hamilton East", "Upper Harbour"]},
 }
 # 2026 electorate polls (National minus Labour, points)
-SEAT_POLLS = {"Hutt South": -12.0, "Otaki / Kapiti": -3.9, "Waitaki": 23.0,
+SEAT_POLLS = {"Hutt South": -12.0, "Kapiti": -3.9, "Waitaki": 23.0,
               "West Coast-Tasman": 6.0, "Mount Albert": -3.0}
-# Maori seats: chance each candidate wins (from Whakaata Maori-Curia polls, Sept-Oct 2026)
+# Tamaki: open after ACT's Brooke van Velden stood down; National (Mahesh Muralidhar)
+# against ACT (James Christmas), National won the party vote there with 52% in 2023.
+TAMAKI_NAT_MARGIN = -2.0   # National minus ACT, points; sd 8 gives National about 40%
+TAMAKI_LAB = 0.05
+# Maori seats: chance each candidate wins, from the Whakaata Maori-Curia seat polls
+# (21 Sept to 15 Oct 2026) and later news. Tamaki Makaurau: Kaipara 36, Leoni 34,
+# Te Ohaere 23 of decided voters, then Leoni quit as Labour's candidate on 23 Oct but
+# stays on the ballot.
 MAORI = {
-    "Hauraki-Waikato": {"TPM": 0.93, "LAB": 0.07},
-    "Waiariki": {"TPM": 0.95, "LAB": 0.03, "GRN": 0.02},
-    "Te Tai Hauauru": {"TPM": 0.82, "LAB": 0.18},
-    "Tamaki Makaurau": {"TPM": 0.72, "LAB": 0.18, "GRN": 0.10},
-    "Te Tai Tokerau": {"GRN": 0.40, "LAB": 0.25, "TTT": 0.20, "TPM": 0.15},
-    "Ikaroa-Rawhiti": {"LAB": 0.75, "TPM": 0.25},
-    "Te Tai Tonga": {"LAB": 0.80, "TPM": 0.10, "IND": 0.08, "GRN": 0.02},
+    "Hauraki-Waikato": {"TPM": 0.92, "LAB": 0.08},
+    "Waiariki": {"TPM": 0.96, "GRN": 0.02, "LAB": 0.02},
+    "Te Tai Hauauru": {"TPM": 0.80, "LAB": 0.20},
+    "Tamaki Makaurau": {"TPM": 0.55, "GRN": 0.30, "LAB": 0.15},
+    "Te Tai Tokerau": {"GRN": 0.45, "LAB": 0.25, "TPM": 0.18, "TTT": 0.12},
+    "Ikaroa-Rawhiti": {"LAB": 0.88, "TPM": 0.08, "GRN": 0.04},
+    "Te Tai Tonga": {"LAB": 0.82, "TPM": 0.07, "IND": 0.06, "GRN": 0.05},
 }
 
 
@@ -210,7 +235,7 @@ def simulate(proj, nsim=20000, nat_overhang=True):
     nat_seats = np.zeros(nsim)
     seat_win = {}
     for name, m23 in {**NAT_HELD, **LAB_HELD}.items():
-        exp_margin = m23 + swing + nat_noise
+        exp_margin = m23 + CANDIDATE_ADJ.get(name, 0.0) + swing + nat_noise
         if name in SEAT_POLLS:
             exp_margin = 0.6 * SEAT_POLLS[name] + 0.4 * exp_margin
             noise = 7.0
@@ -224,10 +249,13 @@ def simulate(proj, nsim=20000, nat_overhang=True):
     ac = 5 + 0.8 * ((V["NAT"] - 30.5) - (V["GRN"] - 10.4)) + RNG.standard_normal(nsim) * 7
     seat_win["Auckland Central"] = (ac > 0).mean()
     nat_seats += ac > 0
-    # one fewer North Island general seat after the 2025 boundary review
-    gen_total = 65 + 1  # 2023 general seats incl. Auckland Central counted above
-    drop = RNG.random(nsim) < (nat_seats / gen_total)
-    nat_seats = nat_seats - drop
+    # Tamaki: National v ACT, moving with how the two parties do against today's projection
+    i_nat, i_act = PARTIES.index("NAT"), PARTIES.index("ACT")
+    tm = TAMAKI_NAT_MARGIN + 0.5 * ((V["NAT"] - m[i_nat]) - (V["ACT"] - m[i_act])) + RNG.standard_normal(nsim) * 8
+    lab_tm = RNG.random(nsim) < TAMAKI_LAB
+    tam_nat = (tm > 0) & ~lab_tm
+    seat_win["Tamaki"] = tam_nat.mean()
+    nat_seats += tam_nat
 
     # Maori seats with a shared swing for Te Pati Maori
     tpm_shift = RNG.standard_normal(nsim) * 0.6

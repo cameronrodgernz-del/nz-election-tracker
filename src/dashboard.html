@@ -1,0 +1,972 @@
+<meta name="dash-one-writer">
+<style>
+.nz{--p-NAT:#2f6fd0;--p-LAB:#d63a3a;--p-GRN:#2f9e4f;--p-NZF:#7b8794;--p-ACT:#d9a300;--p-OPP:#11a39c;--p-TPM:#b3466b;
+  max-width:72rem;margin-inline:auto;display:grid;gap:var(--cds-gap-lg);font-family:var(--font-anthropic-sans);color:var(--color-fg);font-variant-numeric:tabular-nums}
+.nz p{margin:0}
+.nz.nz :is(b,strong){font-weight:var(--cds-font-weight-medium)}
+.nz-head{display:grid;gap:var(--cds-gap-sm)}
+.nz-kicker{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);letter-spacing:.05em;text-transform:uppercase}
+.nz-title{margin:0;font-family:var(--font-anthropic-serif);font-weight:400;font-size:calc(var(--cds-font-size-title) * 1.3);line-height:1.15;text-wrap:balance}
+.nz-take{font-size:var(--cds-font-size-heading);line-height:1.45;max-width:62ch;text-wrap:pretty;min-height:1.45em}
+.nz-meta{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);max-width:72ch;line-height:1.5}
+.nz-tabs{display:flex;gap:var(--cds-gap-xs);border-bottom:1px solid var(--color-border-line);overflow-x:auto;scrollbar-width:none}
+.nz-tabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:var(--cds-pad-sm) var(--cds-pad-md);font:inherit;font-size:var(--cds-font-size-body);color:var(--color-fg-muted);cursor:pointer;white-space:nowrap}
+.nz-tabs button[aria-selected="true"]{color:var(--color-fg);border-bottom-color:var(--color-fg);font-weight:var(--cds-font-weight-medium)}
+.nz-panel{display:grid;gap:var(--cds-gap-md);min-width:0}
+.nz-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);display:grid;gap:var(--cds-gap-sm);align-content:start;min-width:0}
+.nz-card h2{margin:0;font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);text-wrap:balance}
+.nz-note{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);max-width:74ch;line-height:1.5}
+.nz-text{font-size:var(--cds-font-size-body);line-height:1.55;max-width:68ch}
+.nz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:var(--cds-gap-md)}
+.nz-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10.5rem),1fr));gap:var(--cds-gap-md)}
+.nz-tile .t-label{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);display:flex;align-items:center;gap:6px}
+.nz-tile .t-num{font-family:var(--font-anthropic-serif);font-weight:400;font-size:calc(var(--cds-font-size-title) * 1.25);line-height:1.1}
+.nz-tile .t-sub{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);line-height:1.45}
+.nz-sw{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--c,var(--cds-chart-muted));flex:none}
+.nz-legend{display:flex;flex-wrap:wrap;gap:var(--cds-gap-xs) var(--cds-gap-md);font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.nz-legend .item{display:inline-flex;align-items:center;gap:6px}
+.nz-ctrls{display:flex;flex-wrap:wrap;gap:var(--cds-gap-sm)}
+.nz-seg{display:inline-flex;border:1px solid var(--color-border-line);border-radius:var(--cds-radius);overflow:hidden;max-width:100%}
+.nz-seg button{appearance:none;border:0;background:none;font:inherit;font-size:var(--cds-font-size-caption);padding:var(--cds-pad-xs) var(--cds-pad-sm);color:var(--color-fg-muted);cursor:pointer;white-space:nowrap}
+.nz-seg button+button{border-left:1px solid var(--color-border-line)}
+.nz-seg button[aria-pressed="true"]{background:var(--color-fg);color:var(--color-bg)}
+.nz-chart{position:relative;min-width:0}
+.ch-worm{min-height:320px}.ch-hist{min-height:240px}.ch-parl{min-height:200px}.ch-bloc{min-height:46px}.ch-gb{min-height:32px}.ch-seats{min-height:270px}
+.nz-svg{display:block}
+.nz-svg text{font-size:var(--cds-font-size-caption)}
+.nz-svg text.tick{fill:var(--color-fg-muted)}
+.nz-svg text.lbl{fill:var(--color-fg)}
+.nz-svg text.lbl-m{fill:var(--color-fg-muted)}
+.nz .tt{position:absolute;pointer-events:none;z-index:3;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs) var(--cds-pad-sm);font-size:var(--cds-font-size-caption);white-space:nowrap;display:grid;gap:2px}
+.nz .tt[hidden]{display:none}
+.nz .tt-h{color:var(--cds-text-secondary)}
+.nz .tt-r{display:flex;align-items:center;gap:6px}
+.nz .tt-sw{width:8px;height:8px;border-radius:2px;flex:none}
+.nz .tt-v{margin-left:auto;padding-left:12px;font-weight:var(--cds-font-weight-medium)}
+.nz-failed{display:flex;align-items:center;justify-content:center;gap:8px;min-height:inherit;height:100%;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+.nz-dot{width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad);flex:none}
+.gb-rows{display:grid;gap:var(--cds-gap-md)}
+.gb-row{display:grid;gap:6px}
+.gb-label{font-size:var(--cds-font-size-body)}
+.gb-label small{display:block;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.gb{display:flex;gap:2px;height:32px;border-radius:var(--cds-radius);overflow:hidden}
+.gb-seg{flex:0 1 auto;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;font-size:var(--cds-font-size-caption);font-weight:var(--cds-font-weight-medium)}
+.seg-l{background:var(--p-NAT);color:#fff}.seg-h{background:var(--p-LAB);color:#fff}.seg-s{background:var(--cds-chart-muted);color:var(--color-fg)}
+.bloc-row{display:grid;gap:4px}
+.bloc-label{font-size:var(--cds-font-size-body)}
+.nz-tw{overflow-x:auto;min-width:0}
+.nz-t{border-collapse:collapse;width:100%;font-size:var(--cds-font-size-caption)}
+.nz-t th{font-weight:var(--cds-font-weight-medium);color:var(--color-fg-muted);text-align:left;padding:6px 10px;border-bottom:1px solid var(--color-border-line);white-space:nowrap}
+.nz-t td{padding:6px 10px;border-bottom:1px solid var(--color-border-line);white-space:nowrap}
+.nz-t tbody tr:last-child td{border-bottom:0}
+.nz-t th:first-child,.nz-t td:first-child{padding-left:0}
+.t-latest :is(th,td):nth-child(n+3),.t-leans :is(th,td):nth-child(n+2),.t-votes :is(th,td):nth-child(n+2),.t-maori :is(th,td):nth-child(n+2),.t-close :is(th,td):nth-child(3),.t-markets :is(th,td):nth-child(4){text-align:right}
+.t-markets td:nth-child(3){white-space:normal;min-width:9rem}
+.t-markets td:nth-child(6){white-space:normal;min-width:16rem}
+.t-close td:nth-child(4){white-space:normal;min-width:10rem}
+.nz-steps{margin:0;padding-left:1.25rem;display:grid;gap:var(--cds-gap-md);max-width:70ch}
+.nz-steps h3{margin:0 0 4px;font-size:var(--cds-font-size-body);font-weight:var(--cds-font-weight-medium)}
+.nz-steps p{font-size:var(--cds-font-size-body);line-height:1.55}
+.nz-links{margin:0;padding-left:1.25rem;display:grid;gap:6px;font-size:var(--cds-font-size-body);line-height:1.5}
+.nz-links a{color:inherit}
+.nz [data-dash-source-state=empty]{color:transparent}
+.nz [data-dash-source-state=refreshing]{opacity:.5;transition:opacity var(--cds-dur-slow)}
+</style>
+
+<div class="nz">
+  <header class="nz-head" id="top">
+    <p class="nz-kicker">New Zealand general election · Saturday 7 November</p>
+    <h1 class="nz-title">NZ Election Tracker 2026</h1>
+    <p class="nz-take dash-skeleton" id="takeaway">
+      <span data-tk="luxon" hidden>Luxon is favoured to stay prime minister, whichever way Opportunity goes.</span>
+      <span data-tk="lean_l" hidden>Luxon is narrowly ahead, whichever way Opportunity goes.</span>
+      <span data-tk="hipkins" hidden>Hipkins is favoured to become prime minister, whichever way Opportunity goes.</span>
+      <span data-tk="lean_h" hidden>Hipkins is narrowly ahead, whichever way Opportunity goes.</span>
+      <span data-tk="split_h" hidden>Too close to call, and it turns on Opportunity. On what the leaders have said, Hipkins is more likely to govern (<b data-draw="n" data-source="chances" data-field="chance" data-where="view=stated&amp;outcome=Hipkins-led" data-fmt="pct">—</b>). If Opportunity would also deal with National, Luxon is (<b data-draw="n" data-source="chances" data-field="chance" data-where="view=open&amp;outcome=Luxon-led" data-fmt="pct">—</b>).</span>
+      <span data-tk="close" hidden>Neither side is clearly ahead.</span>
+    </p>
+    <p class="nz-meta">Every published poll on one trend line for each party, with each pollster's lean taken out, then <span data-draw="n" data-source="summary" data-field="value" data-where="metric=simulations" data-fmt="int">—</span> simulated elections. Updated <span data-draw="n" data-source="summary" data-field="value" data-where="metric=updated" data-fmt="text">—</span> from <span data-draw="n" data-source="summary" data-field="value" data-where="metric=polls_count" data-fmt="int">—</span> polls.</p>
+    <nav class="nz-tabs" role="tablist" aria-label="Sections">
+      <button type="button" role="tab" data-tab="outlook" aria-selected="true">Outlook</button>
+      <button type="button" role="tab" data-tab="seats" aria-selected="false">Seats</button>
+      <button type="button" role="tab" data-tab="polls" aria-selected="false">Polls</button>
+      <button type="button" role="tab" data-tab="betting" aria-selected="false">Betting</button>
+      <button type="button" role="tab" data-tab="method" aria-selected="false">How it works</button>
+    </nav>
+  </header>
+
+  <section id="outlook" class="nz-panel" role="tabpanel" data-panel>
+    <div class="nz-card" id="govern">
+      <h2>Who can form a government</h2>
+      <p class="nz-note">Share of <span data-draw="n" data-source="summary" data-field="value" data-where="metric=simulations" data-fmt="int">—</span> simulated elections in which each side has the seats to govern.</p>
+      <div class="gb-rows">
+        <div class="gb-row">
+          <p class="gb-label">On stated positions<small>Opportunity can only back Hipkins, since Luxon and Peters have ruled it out</small></p>
+          <div class="nz-chart ch-gb dash-skeleton" id="gb-stated" data-draw="govbar" data-view="stated" data-source="chances"></div>
+        </div>
+        <div class="gb-row">
+          <p class="gb-label">If Opportunity is open to both sides<small>It talks first to whichever of National and Labour has more seats</small></p>
+          <div class="nz-chart ch-gb dash-skeleton" id="gb-open" data-draw="govbar" data-view="open" data-source="chances"></div>
+        </div>
+        <div class="gb-row">
+          <p class="gb-label">On stated positions, without National's extra electorate seats<small>Shows how much rides on the overhang</small></p>
+          <div class="nz-chart ch-gb dash-skeleton" id="gb-nooverhang" data-draw="govbar" data-view="no_overhang" data-source="chances"></div>
+        </div>
+      </div>
+      <p class="nz-legend"><span class="item"><span class="nz-sw" style="--c:var(--p-NAT)"></span>Luxon-led</span><span class="item"><span class="nz-sw"></span>No clear majority</span><span class="item"><span class="nz-sw" style="--c:var(--p-LAB)"></span>Hipkins-led</span></p>
+    </div>
+
+    <div class="nz-tiles">
+      <div class="nz-card nz-tile" id="tile-nat">
+        <p class="t-label"><span class="nz-sw" style="--c:var(--p-NAT)"></span><span>National, party vote today</span></p>
+        <p class="t-num"><span data-draw="n" data-source="eday" data-field="now" data-where="party=NAT" data-fmt="share" data-fetchpriority="high">—</span></p>
+        <p class="t-sub">Election-day estimate <b data-draw="n" data-source="eday" data-field="vote_mid" data-where="party=NAT" data-fmt="share">—</b> (<span data-draw="n" data-source="eday" data-field="vote_lo" data-where="party=NAT" data-fmt="dec1">—</span>–<span data-draw="n" data-source="eday" data-field="vote_hi" data-where="party=NAT" data-fmt="dec1">—</span>)</p>
+      </div>
+      <div class="nz-card nz-tile" id="tile-lab">
+        <p class="t-label"><span class="nz-sw" style="--c:var(--p-LAB)"></span><span>Labour, party vote today</span></p>
+        <p class="t-num"><span data-draw="n" data-source="eday" data-field="now" data-where="party=LAB" data-fmt="share" data-fetchpriority="high">—</span></p>
+        <p class="t-sub">Election-day estimate <b data-draw="n" data-source="eday" data-field="vote_mid" data-where="party=LAB" data-fmt="share">—</b> (<span data-draw="n" data-source="eday" data-field="vote_lo" data-where="party=LAB" data-fmt="dec1">—</span>–<span data-draw="n" data-source="eday" data-field="vote_hi" data-where="party=LAB" data-fmt="dec1">—</span>)</p>
+      </div>
+      <div class="nz-card nz-tile" id="tile-top">
+        <p class="t-label"><span class="nz-sw" style="--c:var(--p-OPP)"></span><span>Chance Opportunity clears <span data-draw="k" data-k="threshold" data-fmt="share0">—</span></span></p>
+        <p class="t-num"><span data-draw="n" data-source="summary" data-field="value" data-where="metric=opp_over5" data-fmt="pct">—</span></p>
+        <p class="t-sub">Party vote today <b data-draw="n" data-source="eday" data-field="now" data-where="party=OPP" data-fmt="share">—</b></p>
+      </div>
+      <div class="nz-card nz-tile" id="tile-overhang">
+        <p class="t-label"><span class="nz-sw" style="--c:var(--p-NAT)"></span><span>Chance National wins extra seats</span></p>
+        <p class="t-num"><span data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_overhang_p" data-fmt="pct">—</span></p>
+        <p class="t-sub">More electorates than its party vote earns, by <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_overhang_mean" data-fmt="dec1">—</b> seats on average</p>
+      </div>
+    </div>
+
+    <div class="nz-card" id="worm">
+      <h2>The worm</h2>
+      <p class="nz-note">Poll average for each party with a <span data-draw="k" data-k="band" data-fmt="pct">—</span> band, run on to election day. Dots are single polls. The dashed line is the <span data-draw="k" data-k="threshold" data-fmt="share0">—</span> threshold; the shaded strip runs from today to election day.</p>
+      <div class="nz-ctrls">
+        <div class="nz-seg" role="group" aria-label="Time range"><button type="button" data-set="range=all">Since 2023 election</button><button type="button" data-set="range=12m">12 months</button><button type="button" data-set="range=3m">3 months</button></div>
+        <div class="nz-seg" role="group" aria-label="Poll dots"><button type="button" data-set="pollview=adjusted">Lean removed</button><button type="button" data-set="pollview=published">As published</button></div>
+      </div>
+      <div class="nz-chart ch-worm dash-skeleton" id="worm-chart" data-draw="worm" data-source="trend polls eday"></div>
+    </div>
+
+    <div class="nz-card" id="history">
+      <h2>How the chances have moved</h2>
+      <p class="nz-note">Each point re-runs the tracker on the polls that were out at the time: weekly from June, then each morning.</p>
+      <div class="nz-ctrls">
+        <div class="nz-seg" role="group" aria-label="View"><button type="button" data-set="hv=stated">Stated positions</button><button type="button" data-set="hv=open">Opportunity open to both</button></div>
+      </div>
+      <div class="nz-chart ch-hist dash-skeleton" id="history-chart" data-draw="hist" data-source="history"></div>
+    </div>
+  </section>
+
+  <section id="seats" class="nz-panel" role="tabpanel" data-panel hidden>
+    <div class="nz-grid">
+      <div class="nz-card" id="party-seats">
+        <h2>Seats each party wins</h2>
+        <p class="nz-note">Most likely number, with the range that covers <span data-draw="k" data-k="band" data-fmt="pct">—</span> of simulations.</p>
+        <div class="nz-chart ch-seats dash-skeleton" id="seats-chart" data-draw="seats" data-source="eday"></div>
+        <p class="nz-note">National wins the most seats in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_most_seats" data-fmt="pct">—</b> of simulations and Labour in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=lab_most_seats" data-fmt="pct">—</b>, yet National beats Labour on the party vote in only <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_more_votes" data-fmt="pct">—</b>. Its electorate seats make the difference.</p>
+      </div>
+      <div class="nz-card" id="blocs">
+        <h2>Can either side get to a majority?</h2>
+        <p class="nz-note">Most likely seats for each side. The whisker covers <span data-draw="k" data-k="band" data-fmt="pct">—</span> of simulations; the dashed line is the most likely majority, <b data-draw="n" data-source="summary" data-field="value" data-where="metric=maj_mid" data-fmt="int">—</b> seats.</p>
+        <div class="bloc-row">
+          <p class="bloc-label">National, ACT and NZ First</p>
+          <div class="nz-chart ch-bloc dash-skeleton" id="bloc-right" data-draw="bloc" data-side="right" data-source="summary"></div>
+        </div>
+        <div class="bloc-row">
+          <p class="bloc-label">Labour, Greens and Te Pāti Māori, with Opportunity on top</p>
+          <div class="nz-chart ch-bloc dash-skeleton" id="bloc-left" data-draw="bloc" data-side="left" data-source="summary"></div>
+        </div>
+        <p class="nz-note">National, ACT and NZ First have a majority on their own in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=right_alone" data-fmt="pct">—</b> of simulations; Labour, the Greens and Te Pāti Māori in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=left_alone" data-fmt="pct">—</b>. In <b data-draw="n" data-source="summary" data-field="value" data-where="metric=opp_decides" data-fmt="pct">—</b>, Opportunity's seats decide it.</p>
+      </div>
+    </div>
+
+    <div class="nz-card" id="votes">
+      <h2>Party vote on election day</h2>
+      <p class="nz-note">Today's trend, then the election-day estimate, which adds what past polls have missed. Low and high cover <span data-draw="k" data-k="band" data-fmt="pct">—</span> of simulations.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-votes" data-source="eday" data-row-key="party" data-need="vote_mid" data-sort="vote_mid:desc">
+          <thead><tr><th data-field="name">Party</th><th data-field="now" data-fmt="share">Today</th><th data-field="vote_mid" data-fmt="share">Election day</th><th data-field="vote_lo" data-fmt="share">Low</th><th data-field="vote_hi" data-fmt="share">High</th><th data-field="seats_mid" data-fmt="int">Seats</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nz-grid">
+      <div class="nz-card" id="parliament">
+        <h2>How big parliament could be</h2>
+        <p class="nz-note">Most likely <b data-draw="n" data-source="summary" data-field="value" data-where="metric=total_mid" data-fmt="int">—</b> seats (<span data-draw="n" data-source="summary" data-field="value" data-where="metric=total_lo" data-fmt="int">—</span>–<span data-draw="n" data-source="summary" data-field="value" data-where="metric=total_hi" data-fmt="int">—</span>). Overhang seats add to the usual total, which lifts the number needed for a majority.</p>
+        <div class="nz-chart ch-parl dash-skeleton" id="parliament-chart" data-draw="parl" data-source="parliament summary"></div>
+      </div>
+      <div class="nz-card" id="overhang">
+        <h2>The overhang</h2>
+        <p class="nz-text">National is on track to win <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_elec_mid" data-fmt="int">—</b> electorates (<span data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_elec_lo" data-fmt="int">—</span>–<span data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_elec_hi" data-fmt="int">—</span>). In <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_overhang_p" data-fmt="pct">—</b> of simulations that is more seats than its party vote earns. It keeps the extra seats, <b data-draw="n" data-source="summary" data-field="value" data-where="metric=nat_overhang_mean" data-fmt="dec1">—</b> on average, and parliament grows.</p>
+        <p class="nz-text">Te Pāti Māori does the same in <b data-draw="n" data-source="summary" data-field="value" data-where="metric=tpm_overhang_p" data-fmt="pct">—</b> of simulations, by <b data-draw="n" data-source="summary" data-field="value" data-where="metric=tpm_overhang_mean" data-fmt="dec1">—</b> seats on average.</p>
+        <p class="nz-text">It matters. On stated positions Luxon's chance is <b data-draw="n" data-source="chances" data-field="chance" data-where="view=stated&amp;outcome=Luxon-led" data-fmt="pct">—</b> with National's extra seats and <b data-draw="n" data-source="chances" data-field="chance" data-where="view=no_overhang&amp;outcome=Luxon-led" data-fmt="pct">—</b> without them.</p>
+      </div>
+    </div>
+
+    <div class="nz-card" id="maori">
+      <h2>Māori electorates</h2>
+      <p class="nz-note">Chance each party wins the seat, from the Whakaata Māori–Curia seat polls taken between late September and mid October and the news since, moved together with Te Pāti Māori's party vote. In Tāmaki Makaurau, Labour's Kerrin Leoni quit as the party's candidate on 23 October after the poll had her two points behind Oriini Kaipara; her name stays on the ballot.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-maori" data-source="maori" data-row-key="seat">
+          <thead><tr><th data-field="seat">Electorate</th><th data-field="TPM" data-fmt="pct">Te Pāti Māori</th><th data-field="LAB" data-fmt="pct">Labour</th><th data-field="GRN" data-fmt="pct">Greens</th><th data-field="TTT" data-fmt="pct">Te Tai Tokerau Party</th><th data-field="IND" data-fmt="pct">Independent</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nz-card" id="close-seats">
+      <h2>General electorates in play</h2>
+      <p class="nz-note">Seats where National's chance of winning is between <span data-draw="k" data-k="close_lo" data-fmt="pct">—</span> and <span data-draw="k" data-k="close_hi" data-fmt="pct">—</span>. Each starts from who would have won it in 2023 on this year's boundaries, allows for MPs standing down, and moves with the swing between National and Labour; a published local poll is blended in. Tāmaki is National against ACT now Brooke van Velden has stood down.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-close" data-source="close_seats" data-row-key="seat">
+          <thead><tr><th data-field="seat">Electorate</th><th data-field="held_2023">2023 winner, new boundaries</th><th data-field="national_chance" data-fmt="pct">National's chance</th><th data-field="local_poll">Local poll</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="polls" class="nz-panel" role="tabpanel" data-panel hidden>
+    <div class="nz-card" id="latest">
+      <h2>Latest polls</h2>
+      <p class="nz-note">Party vote as published, before any lean is taken out. Where a sample size was not published, the tracker assumes <span data-draw="k" data-k="default_n" data-fmt="int">—</span>.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-latest" data-source="latest" data-row-key="poll">
+          <thead><tr><th data-field="pollster">Pollster</th><th data-field="fieldwork">Fieldwork</th><th data-field="sample" data-fmt="int">Sample</th><th data-field="NAT" data-fmt="num">Nat</th><th data-field="LAB" data-fmt="num">Lab</th><th data-field="GRN" data-fmt="num">Grn</th><th data-field="NZF" data-fmt="num">NZF</th><th data-field="ACT" data-fmt="num">ACT</th><th data-field="OPP" data-fmt="num">TOP</th><th data-field="TPM" data-fmt="num">TPM</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="nz-card" id="leans">
+      <h2>How each pollster leans</h2>
+      <p class="nz-note">Points each pollster runs above (+) or below (−) the others for each party, with recent polls counting more. These are taken out before a poll goes into the trend. Pollsters with few recent polls are pulled towards zero.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-leans" data-source="leans_wide" data-row-key="pollster">
+          <thead><tr><th data-field="pollster">Pollster</th><th data-field="NAT" data-fmt="signed">Nat</th><th data-field="LAB" data-fmt="signed">Lab</th><th data-field="GRN" data-fmt="signed">Grn</th><th data-field="NZF" data-fmt="signed">NZF</th><th data-field="ACT" data-fmt="signed">ACT</th><th data-field="OPP" data-fmt="signed">TOP</th><th data-field="recent_polls" data-fmt="int">Recent polls</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="betting" class="nz-panel" role="tabpanel" data-panel hidden>
+    <div class="nz-card" id="markets">
+      <h2>Betting and prediction markets</h2>
+      <p class="nz-text">Kept apart from the forecast and never blended into it. A price counts here only if it is a bookmaker's fixed-odds price, with the bookmaker's margin taken out, or a prediction market or exchange with at least <b data-draw="k" data-k="min_traded" data-fmt="usd">—</b> traded and no more than <b data-draw="k" data-k="max_gap" data-fmt="int">—</b> cents between the buy and sell price.</p>
+      <p class="nz-text" data-mk="none" hidden>Nothing checked passes that test yet, so there is no market price to set against the tracker. The thin markets are listed so you can see what people are posting, but they are not used.</p>
+      <p class="nz-text" data-mk="some" hidden><b data-draw="n" data-source="market_count" data-field="counted" data-fmt="int">—</b> of the markets checked pass that test and are marked as counted below. The rest are listed but not used.</p>
+      <div class="nz-tw">
+        <table class="nz-t t-markets" data-source="markets" data-row-key="market,venue">
+          <thead><tr><th data-field="market">Market</th><th data-field="venue">Where</th><th data-field="reading">Reading</th><th data-field="traded_usd" data-fmt="usd">Traded</th><th data-field="counted">Counted</th><th data-field="reason">Why</th><th data-field="checked" data-fmt="date">Checked</th></tr></thead>
+          <tbody data-draw="rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="method" class="nz-panel" role="tabpanel" data-panel hidden>
+    <div class="nz-card" id="how">
+      <h2>How the tracker works</h2>
+      <ol class="nz-steps">
+        <li><h3>Every poll goes in</h3><p>All published party-vote polls since the 2023 election: 1News-Verian, RNZ-Reid Research, Taxpayers' Union-Curia, Roy Morgan, The Post-Freshwater and Anacta (Talbot Mills until it was renamed in September). A poll is placed at the middle of its fieldwork, and bigger samples count for a little more.</p></li>
+        <li><h3>Each pollster's lean comes out</h3><p>Every pollster runs a little high or low for some parties. The tracker measures each one against the others over the past 16 months, with recent polls counting more, and takes it out. The middle is set mainly by 1News-Verian, RNZ-Reid Research and Curia, with the others counting for a little less, so no single pollster decides where the line sits.</p></li>
+        <li><h3>One line per party</h3><p>Each party's support is treated as something that drifts from day to day. The tracker draws the line that best fits every poll at once, and how fast a party's support has really been moving decides how hard one new poll can pull the line. The band shows how sure it is.</p></li>
+        <li><h3>Allowing for the polls being wrong together</h3><p>In 2017, 2020 and 2023 the final polls as a group missed some parties by a few points, and the Greens tended to poll above their result. The election-day estimates build in misses of that size, shared by every pollster, plus a small correction for the Greens. A miss for National tends to come with the opposite miss for Labour.</p></li>
+        <li><h3>Running the election</h3><p>The tracker then runs the election <span data-draw="n" data-source="summary" data-field="value" data-where="metric=simulations" data-fmt="int">—</span> times. Each run draws a party vote for every party, settles the electorates, applies the <span data-draw="k" data-k="threshold" data-fmt="share0">—</span> threshold (a party that wins an electorate is in regardless), shares out the seats with the Sainte-Laguë formula the Electoral Commission uses, and keeps any overhang seats.</p></li>
+        <li><h3>Electorates</h3><p>Each general electorate starts from who would have won it in 2023 on the new boundaries drawn in 2025, using The Tally Room's estimates where they are published and the tracker's own estimates for the two new Wellington seats, Kapiti and Kenepuru. A party whose MP is standing down loses about two points, and National MPs first elected in 2023 get a smaller lift. Each seat then moves with the national swing between National and Labour, with room for local surprises. Where a local poll has been published (Hutt South, Kapiti, Waitaki, West Coast-Tasman, Mount Albert, Auckland Central) it is blended in. Auckland Central is treated as National against the Greens, and Tāmaki as National against ACT. The Māori electorates follow the Whakaata Māori–Curia seat polls and the news since.</p></li>
+        <li><h3>Who can govern</h3><p>National, ACT and NZ First are counted as one side; Labour, the Greens and Te Pāti Māori as the other. Luxon and Peters have both ruled out working with Opportunity, so on stated positions Opportunity can only help Hipkins. The second view relaxes that: Opportunity talks first to whichever of National and Labour has more seats. The third view is the first with National's extra electorate seats taken away, to show how much rides on them.</p></li>
+        <li><h3>What it cannot see</h3><p>A late swing after the last polls, a big change in who turns out, and coalition talks that break from what the leaders have said. The electorate part is the simplest piece: most seats have no poll, so they rest on the 2023 result and the national swing, and that drives how many extra seats National is likely to win.</p></li>
+      </ol>
+    </div>
+    <div class="nz-card" id="sources">
+      <h2>Sources</h2>
+      <ul class="nz-links">
+        <li><a href="https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_New_Zealand_general_election" target="_blank" rel="noopener">Opinion polling for the 2026 New Zealand general election</a>, checked against each pollster's release as reported by 1News, RNZ, The Post, the Taxpayers' Union, Roy Morgan and Talbot Mills.</li>
+        <li><a href="https://www.electionresults.govt.nz/electionresults_2023/" target="_blank" rel="noopener">2023 general election official results</a>, Electoral Commission.</li>
+        <li><a href="https://www.tallyroom.com.au/62140" target="_blank" rel="noopener">New Zealand's new electoral map</a>, The Tally Room, for the 2023 results worked out on the 2025 boundaries.</li>
+        <li>Whakaata Māori–Curia polls of the Māori electorates, September and October 2026, as reported by The Spinoff.</li>
+        <li>Market prices from the Polymarket and Kalshi market pages, on the date shown against each.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const NZ = (window.NZ = {});
+  NZ.K = {threshold: 5, band: 0.9, min_traded: 250000, max_gap: 2, close_lo: 0.05, close_hi: 0.95, default_n: 1000};
+  NZ.DEF = {range: '12m', pollview: 'adjusted', hv: 'stated'};
+  NZ.C = {NAT: '#2f6fd0', LAB: '#d63a3a', GRN: '#2f9e4f', NZF: '#7b8794', ACT: '#d9a300', OPP: '#11a39c', TPM: '#b3466b', TTT: '#9a7a4c', IND: '#9a9a9a'};
+  NZ.ORDER = ['NAT', 'LAB', 'GRN', 'NZF', 'ACT', 'OPP', 'TPM', 'TTT', 'IND'];
+  const f1 = d3.format('.1f');
+  NZ.f = {
+    pct: (v) => d3.format('.0%')(+v),
+    pct1: (v) => d3.format('.1%')(+v),
+    share: (v) => f1(+v) + '%',
+    share0: (v) => d3.format('.0f')(+v) + '%',
+    dec1: (v) => f1(+v),
+    num: (v) => String(+v),
+    int: (v) => d3.format(',')(Math.round(+v)),
+    signed: (v) => d3.format('+.1f')(+v),
+    usd: (v) => 'US$' + d3.format(',')(Math.round(+v)),
+    date: (v) => d3.utcFormat('%-d %b')(new Date(String(v).slice(0, 10) + 'T00:00:00Z')),
+    text: (v) => String(v),
+  };
+  NZ.isNum = (fmt) => fmt && fmt !== 'text' && fmt !== 'date';
+  NZ.param = (k) => {
+    const p = dash.params() || {};
+    return p[k] ?? NZ.DEF[k];
+  };
+  NZ.status = (ids) => {
+    let loading = false;
+    for (const id of ids) {
+      const s = dash.data(id).status;
+      if (s === 'ok') continue;
+      if (s === 'loading') loading = true;
+      else return 'error';
+    }
+    return loading ? 'loading' : 'ok';
+  };
+  NZ.rows = (id) => {
+    const g = dash.data(id);
+    return g.status === 'ok' && Array.isArray(g.data) ? g.data : [];
+  };
+  NZ.find = (rows, where) => {
+    if (!where) return rows[0];
+    const conds = where.split('&').map((p) => {
+      const i = p.indexOf('=');
+      return [decodeURIComponent(p.slice(0, i)), decodeURIComponent(p.slice(i + 1))];
+    });
+    return rows.find((r) => conds.every(([k, v]) => String(r[k]) === v));
+  };
+  NZ.summary = () => {
+    const S = {};
+    NZ.rows('summary').forEach((r) => { S[r.metric] = r.value; });
+    return S;
+  };
+  NZ.day = (s) => new Date(String(s).slice(0, 10) + 'T00:00:00Z');
+  NZ.gate = (el, ids) => {
+    const s = NZ.status(ids);
+    if (s === 'ok') { el.classList.remove('dash-skeleton'); return true; }
+    el.replaceChildren();
+    if (s === 'error') {
+      el.classList.remove('dash-skeleton');
+      const line = document.createElement('div');
+      line.className = 'nz-failed';
+      const dot = document.createElement('span');
+      dot.className = 'nz-dot';
+      line.append(dot, document.createTextNode('Failed to load'));
+      el.append(line);
+    } else el.classList.add('dash-skeleton');
+    return false;
+  };
+  NZ.svg = (el, W, H) => d3.select(el).append('svg').attr('class', 'nz-svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`);
+  NZ.textH = 14;
+  NZ.textW = (svg, strings, cls) => {
+    const g = svg.append('g');
+    const w = strings.map((s) => {
+      const t = g.append('text').attr('class', cls).text(s);
+      const n = t.node();
+      const b = n.getBBox();
+      if (b.height) NZ.textH = Math.max(12, b.height);
+      return n.getComputedTextLength();
+    });
+    g.remove();
+    return w;
+  };
+  NZ.dodge = (items, gap, lo, hi) => {
+    items.sort((a, b) => a.y - b.y);
+    items.forEach((it, i) => {
+      it.ly = Math.max(it.y, lo);
+      if (i && it.ly < items[i - 1].ly + gap) it.ly = items[i - 1].ly + gap;
+    });
+    const n = items.length;
+    if (n && items[n - 1].ly > hi) {
+      items[n - 1].ly = hi;
+      for (let i = n - 2; i >= 0; i--) if (items[i].ly > items[i + 1].ly - gap) items[i].ly = items[i + 1].ly - gap;
+    }
+    return items;
+  };
+  NZ.thin = (svgNode, texts) => {
+    const box = svgNode.getBoundingClientRect();
+    let last = null;
+    texts.forEach((t) => {
+      const r = t.getBoundingClientRect();
+      if (!r.width) return;
+      const out = r.left < box.left - 0.5 || r.right > box.right + 0.5;
+      const hit = last && r.left < last.right + 8;
+      if (out || hit) t.remove();
+      else last = r;
+    });
+  };
+  NZ.axisStyle = (ax) => {
+    ax.attr('font-size', null).attr('font-family', null);
+    ax.select('.domain').style('stroke', 'var(--cds-chart-axis)');
+    ax.selectAll('.tick line').style('stroke', 'var(--cds-chart-axis)');
+    ax.selectAll('.tick text').attr('class', 'tick');
+  };
+  NZ.tip = (el) => {
+    let t = el.querySelector(':scope > .tt');
+    if (!t) {
+      t = document.createElement('div');
+      t.className = 'tt';
+      t.hidden = true;
+      el.append(t);
+    }
+    return t;
+  };
+  NZ.tipFill = (t, head, lines) => {
+    const h = document.createElement('div');
+    h.className = 'tt-h';
+    h.textContent = head;
+    t.replaceChildren(h, ...lines.map((l) => {
+      const row = document.createElement('div');
+      row.className = 'tt-r';
+      if (l.color) {
+        const s = document.createElement('span');
+        s.className = 'tt-sw';
+        s.style.background = l.color;
+        row.append(s);
+      }
+      const a = document.createElement('span');
+      a.textContent = l.label;
+      row.append(a);
+      if (l.value != null) {
+        const b = document.createElement('span');
+        b.className = 'tt-v';
+        b.textContent = l.value;
+        row.append(b);
+      }
+      return row;
+    }));
+  };
+  NZ.tipAt = (el, t, x, y) => {
+    t.hidden = false;
+    const W = el.clientWidth, H = el.clientHeight, tw = t.offsetWidth, th = t.offsetHeight;
+    let left = x + 14;
+    if (left + tw > W) left = x - 14 - tw;
+    if (left < 0) left = Math.max(0, (W - tw) / 2);
+    let top = y - th - 10;
+    if (top < 0) top = Math.max(0, Math.min(H - th, y + 14));
+    t.style.left = left + 'px';
+    t.style.top = top + 'px';
+  };
+  NZ.tipHide = (el) => {
+    const t = el.querySelector(':scope > .tt');
+    if (t) t.hidden = true;
+  };
+  NZ.local = (el, ev) => {
+    const b = el.getBoundingClientRect();
+    return [ev.clientX - b.left, ev.clientY - b.top];
+  };
+  const memo = new WeakMap();
+  NZ.memo = (rows, key, make) => {
+    let m = memo.get(rows);
+    if (!m) { m = {}; memo.set(rows, m); }
+    if (!(key in m)) m[key] = make(rows);
+    return m[key];
+  };
+})();
+</script>
+
+<script>
+(() => {
+  const NZ = window.NZ;
+
+  dash.draw('n', (el) => {
+    const id = el.dataset.source;
+    const s = NZ.status([id]);
+    if (s !== 'ok') {
+      el.textContent = '—';
+      el.classList.toggle('dash-skeleton', s === 'loading');
+      return;
+    }
+    el.classList.remove('dash-skeleton');
+    const row = NZ.find(NZ.rows(id), el.dataset.where);
+    const v = row ? row[el.dataset.field] : null;
+    const fmtName = el.dataset.fmt || 'text';
+    const fmt = NZ.f[fmtName] || NZ.f.text;
+    const bad = v == null || v === '' || (NZ.isNum(fmtName) && !isFinite(+v));
+    el.textContent = bad ? '—' : fmt(v);
+  });
+
+  dash.draw('k', (el) => {
+    const v = NZ.K[el.dataset.k];
+    const fmt = NZ.f[el.dataset.fmt] || NZ.f.text;
+    el.textContent = v == null ? '—' : fmt(v);
+  });
+
+  dash.draw('rows', (tb) => {
+    const table = tb.closest('table');
+    if (!table) return;
+    const id = table.dataset.source;
+    if (NZ.status([id]) !== 'ok') { tb.replaceChildren(); return; }
+    let rows = NZ.rows(id).slice();
+    const need = table.dataset.need;
+    if (need) rows = rows.filter((r) => r[need] != null && r[need] !== '');
+    const sort = table.dataset.sort;
+    if (sort) {
+      const [k, dir] = sort.split(':');
+      const sign = dir === 'asc' ? 1 : -1;
+      rows.sort((a, b) => sign * ((+a[k] || 0) - (+b[k] || 0)));
+    }
+    const keys = (table.dataset.rowKey || '').split(',').filter(Boolean);
+    const ths = [...table.querySelectorAll('thead th')];
+    tb.replaceChildren(...rows.map((r) => {
+      const tr = document.createElement('tr');
+      if (keys.length === 1) tr.dataset.key = String(r[keys[0]]);
+      else if (keys.length > 1) tr.dataset.key = keys.map((k) => encodeURIComponent(String(r[k]))).join(',');
+      ths.forEach((th) => {
+        const td = document.createElement('td');
+        const v = r[th.dataset.field];
+        const fmtName = th.dataset.fmt || 'text';
+        const fmt = NZ.f[fmtName] || NZ.f.text;
+        const bad = v == null || v === '' || (NZ.isNum(fmtName) && !isFinite(+v));
+        td.textContent = bad ? '–' : fmt(v);
+        tr.append(td);
+      });
+      return tr;
+    }));
+  });
+
+  // Which headline sentence shows
+  const MARGIN = 0.15;
+  dash.onData(() => {
+    const g = dash.data('chances');
+    document.querySelectorAll('.nz-take').forEach((p) => p.classList.toggle('dash-skeleton', g.status === 'loading'));
+    let pick = null;
+    if (g.status === 'ok' && Array.isArray(g.data)) {
+      const get = (v, o) => {
+        const r = g.data.find((x) => x.view === v && x.outcome === o);
+        return r ? +r.chance : 0;
+      };
+      const sL = get('stated', 'Luxon-led'), sH = get('stated', 'Hipkins-led');
+      const oL = get('open', 'Luxon-led'), oH = get('open', 'Hipkins-led');
+      if (sL > sH && oL > oH) pick = Math.min(sL - sH, oL - oH) > MARGIN ? 'luxon' : 'lean_l';
+      else if (sH > sL && oH > oL) pick = Math.min(sH - sL, oH - oL) > MARGIN ? 'hipkins' : 'lean_h';
+      else if (sH > sL && oL > oH) pick = 'split_h';
+      else pick = 'close';
+    }
+    document.querySelectorAll('[data-tk]').forEach((s) => { s.hidden = s.dataset.tk !== pick; });
+  });
+
+  // Market sentence
+  dash.onData(() => {
+    const g = dash.data('market_count');
+    const ok = g.status === 'ok' && Array.isArray(g.data) && g.data.length > 0;
+    const n = ok ? +g.data[0].counted : NaN;
+    document.querySelectorAll('[data-mk]').forEach((p) => {
+      p.hidden = !ok || (p.dataset.mk === 'none' ? n !== 0 : !(n > 0));
+    });
+  });
+
+  // Toggle buttons
+  document.querySelectorAll('[data-set]').forEach((b) => b.addEventListener('click', () => {
+    const [k, v] = b.dataset.set.split('=');
+    dash.setParams({[k]: v});
+  }));
+  dash.onData(() => {
+    document.querySelectorAll('[data-set]').forEach((b) => {
+      const [k, v] = b.dataset.set.split('=');
+      b.setAttribute('aria-pressed', String(NZ.param(k) === v));
+    });
+  });
+
+  // Tabs
+  const panels = () => [...document.querySelectorAll('[data-panel]')];
+  const show = (id, link) => {
+    const ids = panels().map((s) => s.id);
+    if (!ids.includes(id)) id = ids[0];
+    panels().forEach((s) => { s.hidden = s.id !== id; });
+    document.querySelectorAll('[data-tab]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === id)));
+    if (link) dash.setLink(id);
+  };
+  document.querySelectorAll('[data-tab]').forEach((b) => b.addEventListener('click', () => show(b.dataset.tab, true)));
+  const named = location.hash.slice(1);
+  const target = named ? document.getElementById(named) : null;
+  const panel = target ? target.closest('[data-panel]') : null;
+  show(panel ? panel.id : '', false);
+  if (target && panel && target !== panel) requestAnimationFrame(() => requestAnimationFrame(() => target.scrollIntoView()));
+})();
+</script>
+
+<script>
+dash.calc('market_count', {
+  inputs: ['markets'],
+  title: 'Markets that pass the rule',
+  description: 'How many of the markets checked are marked as counted.',
+  fn: (markets) => [{counted: markets.filter((m) => m.counted === 'Yes').length}],
+});
+</script>
+
+<script>
+(() => {
+  const NZ = window.NZ;
+  const SEGS = [['Luxon-led', 'seg-l'], ['No clear majority', 'seg-s'], ['Hipkins-led', 'seg-h']];
+  dash.draw('govbar', (el) => {
+    if (!NZ.gate(el, ['chances'])) return;
+    const rows = NZ.rows('chances').filter((r) => r.view === el.dataset.view);
+    const W = el.clientWidth || 300;
+    const bar = document.createElement('div');
+    bar.className = 'gb';
+    SEGS.forEach(([o, cls]) => {
+      const r = rows.find((z) => z.outcome === o);
+      if (!r) return;
+      const v = +r.chance;
+      if (!(v > 0)) return;
+      const s = document.createElement('div');
+      s.className = 'gb-seg ' + cls;
+      s.style.flexBasis = (v * 100) + '%';
+      const lab = NZ.f.pct(v);
+      if (v * W >= lab.length * 8 + 14) {
+        const t = document.createElement('span');
+        t.textContent = lab;
+        s.append(t);
+      }
+      s.addEventListener('pointermove', (ev) => {
+        const tip = NZ.tip(el);
+        NZ.tipFill(tip, o, [{label: 'Chance', value: NZ.f.pct1(v)}]);
+        const [x, y] = NZ.local(el, ev);
+        NZ.tipAt(el, tip, x, y);
+      });
+      s.addEventListener('pointerleave', () => NZ.tipHide(el));
+      bar.append(s);
+    });
+    el.replaceChildren(bar);
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const NZ = window.NZ;
+  const truthy = (v) => v === true || v === 'true';
+  const parseTrend = (rows) => {
+    const pts = rows.map((r) => ({party: r.party, d: NZ.day(r.date), mid: +r.mid, lo: +r.lo, hi: +r.hi, ahead: truthy(r.ahead)}))
+      .filter((p) => !isNaN(p.d) && isFinite(p.mid));
+    const by = d3.group(pts, (p) => p.party);
+    by.forEach((a) => a.sort((x, y) => x.d - y.d));
+    const past = pts.filter((p) => !p.ahead);
+    const end = d3.max(pts, (p) => p.d);
+    return {by, start: d3.min(pts, (p) => p.d), end, today: d3.max(past, (p) => p.d) || end};
+  };
+  const parsePolls = (rows) => rows.map((r) => ({
+    party: r.party, d: NZ.day(r.date), poll: r.poll,
+    pub: r.published == null ? NaN : +r.published,
+    adj: r.lean_removed == null ? NaN : +r.lean_removed,
+  })).filter((p) => !isNaN(p.d));
+
+  dash.draw('worm', (el) => {
+    if (!NZ.gate(el, ['trend', 'polls', 'eday'])) return;
+    const T = NZ.memo(NZ.rows('trend'), 'trend', parseTrend);
+    const PL = NZ.memo(NZ.rows('polls'), 'polls', parsePolls);
+    const info = new Map(NZ.rows('eday').map((r) => [r.party, r]));
+    const range = NZ.param('range');
+    const view = NZ.param('pollview');
+    const val = (q) => (view === 'published' ? q.pub : q.adj);
+    const start = range === 'all' ? T.start : d3.utcDay.offset(T.today, range === '3m' ? -92 : -365);
+    const W = Math.max(280, el.clientWidth || 0), H = 320, narrow = W < 560;
+    const fv = d3.format('.1f');
+    const series = NZ.ORDER.filter((p) => T.by.has(p)).map((p) => {
+      const all = T.by.get(p);
+      const meta = info.get(p) || {};
+      return {p, all, pts: all.filter((q) => q.d >= start), last: all[all.length - 1], color: NZ.C[p] || '#888',
+        name: meta.name || p, label: narrow ? (meta.short || p) : (meta.name || p)};
+    }).filter((s) => s.pts.length);
+    series.forEach((s) => { s.text = `${s.label} ${fv(s.last.mid)}`; });
+    const dots = PL.filter((q) => q.d >= start && q.d <= T.end && isFinite(val(q)) && T.by.has(q.party));
+
+    el.replaceChildren();
+    const svg = NZ.svg(el, W, H);
+    const lw = NZ.textW(svg, series.map((s) => s.text), 'lbl');
+    const yMax = d3.max([d3.max(series, (s) => d3.max(s.pts, (q) => q.hi)), d3.max(dots, val)].filter((v) => isFinite(v))) || 50;
+    const y0 = d3.scaleLinear([0, yMax * 1.04], [0, 1]).nice();
+    const yt = y0.ticks(5);
+    const tw = NZ.textW(svg, yt.map((t) => t + '%'), 'tick');
+    const ml = Math.ceil(d3.max(tw) || 20) + 11, mr = Math.ceil(d3.max(lw) || 40) + 28, mt = 20, mb = 26;
+    const x = d3.scaleUtc([start, T.end], [ml, W - mr]);
+    const y = d3.scaleLinear(y0.domain(), [H - mb, mt]);
+
+    svg.append('g').selectAll('line').data(yt).join('line')
+      .attr('x1', ml).attr('x2', W - mr).attr('y1', (t) => y(t)).attr('y2', (t) => y(t))
+      .style('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(yt).join('text').attr('class', 'tick')
+      .attr('x', ml - 8).attr('y', (t) => y(t)).attr('dy', '0.32em').attr('text-anchor', 'end').text((t) => t + '%');
+
+    svg.append('rect').attr('x', x(T.today)).attr('y', mt).attr('width', Math.max(0, x(T.end) - x(T.today))).attr('height', H - mb - mt)
+      .style('fill', 'var(--cds-chart-grid)').style('opacity', 0.6);
+    svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(NZ.K.threshold)).attr('y2', y(NZ.K.threshold))
+      .style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+
+    const area = d3.area().x((q) => x(q.d)).y0((q) => y(q.lo)).y1((q) => y(q.hi));
+    svg.append('g').selectAll('path').data(series).join('path').attr('d', (s) => area(s.pts))
+      .style('fill', (s) => s.color).style('opacity', 0.1);
+
+    svg.append('g').selectAll('circle').data(dots).join('circle')
+      .attr('cx', (q) => x(q.d)).attr('cy', (q) => y(val(q))).attr('r', narrow ? 1.8 : 2.4)
+      .style('fill', (q) => NZ.C[q.party] || '#888').style('opacity', 0.45);
+
+    const line = d3.line().x((q) => x(q.d)).y((q) => y(q.mid));
+    const lg = svg.append('g').attr('fill', 'none').attr('stroke-width', 2);
+    series.forEach((s) => {
+      const past = s.pts.filter((q) => !q.ahead);
+      const ahead = s.pts.filter((q) => q.ahead);
+      if (past.length && ahead.length) ahead.unshift(past[past.length - 1]);
+      if (past.length > 1) lg.append('path').attr('d', line(past)).style('stroke', s.color).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round');
+      if (ahead.length > 1) lg.append('path').attr('d', line(ahead)).style('stroke', s.color).attr('stroke-dasharray', '3 3');
+    });
+
+    svg.append('line').attr('x1', x(T.today)).attr('x2', x(T.today)).attr('y1', mt).attr('y2', H - mb).style('stroke', 'var(--cds-chart-axis)');
+    svg.append('text').attr('class', 'tick').attr('x', x(T.today) - 4).attr('y', mt - 7).attr('text-anchor', 'end').text('Today');
+
+    const every = range === 'all' ? d3.utcMonth.every(narrow ? 6 : 3) : range === '12m' ? d3.utcMonth.every(narrow ? 3 : 1) : d3.utcWeek.every(narrow ? 3 : 2);
+    const fY = d3.utcFormat('%b %Y'), fM = d3.utcFormat('%b'), fD = d3.utcFormat('%-d %b');
+    const fmtX = (d) => (range === '3m' ? fD(d) : range === 'all' || d.getUTCMonth() === 0 ? fY(d) : fM(d));
+    const ax = svg.append('g').attr('transform', `translate(0,${H - mb})`)
+      .call(d3.axisBottom(x).ticks(every).tickFormat(fmtX).tickSizeOuter(0));
+    NZ.axisStyle(ax);
+    NZ.thin(svg.node(), ax.selectAll('text').nodes());
+
+    const items = series.map((s) => ({s, y: y(s.last.mid)}));
+    NZ.dodge(items, Math.ceil(NZ.textH) + 2, mt + 6, H - mb - 6);
+    const lx = W - mr + 8;
+    const eg = svg.append('g');
+    items.forEach((it) => {
+      eg.append('path').attr('d', `M${x(it.s.last.d)},${it.y}L${lx + 2},${it.ly}`).attr('fill', 'none').style('stroke', it.s.color).style('opacity', 0.7);
+      eg.append('rect').attr('x', lx + 4).attr('y', it.ly - 4).attr('width', 8).attr('height', 8).attr('rx', 2).style('fill', it.s.color);
+      eg.append('text').attr('class', 'lbl').attr('x', lx + 16).attr('y', it.ly).attr('dy', '0.32em').text(it.s.text);
+    });
+
+    const hover = svg.append('g').style('display', 'none');
+    const rule = hover.append('line').attr('y1', mt).attr('y2', H - mb).style('stroke', 'var(--cds-chart-axis)');
+    const hd = hover.selectAll('circle').data(series).join('circle').attr('r', 4)
+      .style('fill', (s) => s.color).style('stroke', 'var(--color-panel)').attr('stroke-width', 1.5);
+    const fd = d3.utcFormat('%-d %b %Y');
+    const bis = d3.bisector((q) => q.d).center;
+    svg.append('rect').attr('x', ml).attr('y', mt).attr('width', Math.max(0, W - mr - ml)).attr('height', H - mb - mt)
+      .style('fill', 'transparent').style('touch-action', 'pan-y')
+      .on('pointermove', (ev) => {
+        const [px, py] = d3.pointer(ev, svg.node());
+        const d = x.invert(px);
+        const at = new Map();
+        series.forEach((s) => {
+          const q = s.pts[bis(s.pts, d)];
+          if (q) at.set(s, q);
+        });
+        if (!at.size) return;
+        const q0 = at.values().next().value;
+        hover.style('display', null);
+        rule.attr('x1', x(q0.d)).attr('x2', x(q0.d));
+        hd.attr('cx', (s) => (at.has(s) ? x(at.get(s).d) : -20)).attr('cy', (s) => (at.has(s) ? y(at.get(s).mid) : -20));
+        const lines = [...at.entries()].sort((a, b) => b[1].mid - a[1].mid)
+          .map(([s, q]) => ({color: s.color, label: s.name, value: fv(q.mid) + '%'}));
+        const tip = NZ.tip(el);
+        NZ.tipFill(tip, fd(q0.d) + (q0.ahead ? ', projected' : ''), lines);
+        NZ.tipAt(el, tip, x(q0.d), py);
+      })
+      .on('pointerleave', () => {
+        hover.style('display', 'none');
+        NZ.tipHide(el);
+      });
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const NZ = window.NZ;
+  dash.draw('hist', (el) => {
+    if (!NZ.gate(el, ['history'])) return;
+    const rows = NZ.rows('history').map((r) => ({
+      d: NZ.day(r.asof), luxon: +r.luxon, hipkins: +r.hipkins, stuck: +r.stuck, open_luxon: +r.open_luxon, open_hipkins: +r.open_hipkins,
+    })).filter((r) => !isNaN(r.d)).sort((a, b) => a.d - b.d);
+    el.replaceChildren();
+    if (rows.length < 2) return;
+    const defs = NZ.param('hv') === 'open'
+      ? [['open_luxon', 'Luxon-led', NZ.C.NAT], ['open_hipkins', 'Hipkins-led', NZ.C.LAB]]
+      : [['luxon', 'Luxon-led', NZ.C.NAT], ['hipkins', 'Hipkins-led', NZ.C.LAB], ['stuck', 'No clear majority', 'var(--cds-chart-muted)']];
+    const W = Math.max(280, el.clientWidth || 0), H = 240;
+    const fp = d3.format('.0%');
+    const lastRow = rows[rows.length - 1];
+    const series = defs.map(([k, label, color]) => ({k, label, color, pts: rows.filter((r) => isFinite(r[k])), text: `${label} ${fp(lastRow[k])}`}))
+      .filter((s) => s.pts.length > 1);
+    const svg = NZ.svg(el, W, H);
+    const lw = NZ.textW(svg, series.map((s) => s.text), 'lbl');
+    const yt = [0, 0.25, 0.5, 0.75, 1];
+    const tw = NZ.textW(svg, yt.map(fp), 'tick');
+    const ml = Math.ceil(d3.max(tw) || 24) + 11, mr = Math.ceil(d3.max(lw) || 60) + 24, mt = 10, mb = 26;
+    const x = d3.scaleUtc(d3.extent(rows, (r) => r.d), [ml, W - mr]);
+    const y = d3.scaleLinear([0, 1], [H - mb, mt]);
+    svg.append('g').selectAll('line').data(yt).join('line')
+      .attr('x1', ml).attr('x2', W - mr).attr('y1', (t) => y(t)).attr('y2', (t) => y(t))
+      .style('stroke', (t) => (t === 0.5 ? 'var(--cds-chart-reference)' : 'var(--cds-chart-grid)'))
+      .attr('stroke-dasharray', (t) => (t === 0.5 ? '4 3' : null));
+    svg.append('g').selectAll('text').data(yt).join('text').attr('class', 'tick')
+      .attr('x', ml - 8).attr('y', (t) => y(t)).attr('dy', '0.32em').attr('text-anchor', 'end').text(fp);
+    const line = d3.line().x((r) => x(r.d));
+    const lg = svg.append('g').attr('fill', 'none').attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round');
+    series.forEach((s) => lg.append('path').attr('d', line.y((r) => y(r[s.k]))(s.pts)).style('stroke', s.color));
+    const ax = svg.append('g').attr('transform', `translate(0,${H - mb})`)
+      .call(d3.axisBottom(x).ticks(d3.utcMonth.every(1)).tickFormat(d3.utcFormat('%b')).tickSizeOuter(0));
+    NZ.axisStyle(ax);
+    NZ.thin(svg.node(), ax.selectAll('text').nodes());
+    const items = series.map((s) => ({s, y: y(lastRow[s.k])}));
+    NZ.dodge(items, Math.ceil(NZ.textH) + 2, mt + 6, H - mb - 6);
+    const lx = W - mr + 8;
+    items.forEach((it) => {
+      svg.append('path').attr('d', `M${x(lastRow.d)},${it.y}L${lx + 2},${it.ly}`).attr('fill', 'none').style('stroke', it.s.color);
+      svg.append('text').attr('class', 'lbl').attr('x', lx + 6).attr('y', it.ly).attr('dy', '0.32em').text(it.s.text);
+    });
+    const hover = svg.append('g').style('display', 'none');
+    const rule = hover.append('line').attr('y1', mt).attr('y2', H - mb).style('stroke', 'var(--cds-chart-axis)');
+    const hd = hover.selectAll('circle').data(series).join('circle').attr('r', 4)
+      .style('fill', (s) => s.color).style('stroke', 'var(--color-panel)').attr('stroke-width', 1.5);
+    const fd = d3.utcFormat('%-d %b %Y');
+    const bis = d3.bisector((r) => r.d).center;
+    svg.append('rect').attr('x', ml).attr('y', mt).attr('width', Math.max(0, W - mr - ml)).attr('height', H - mb - mt)
+      .style('fill', 'transparent').style('touch-action', 'pan-y')
+      .on('pointermove', (ev) => {
+        const [px, py] = d3.pointer(ev, svg.node());
+        const r = rows[bis(rows, x.invert(px))];
+        if (!r) return;
+        hover.style('display', null);
+        rule.attr('x1', x(r.d)).attr('x2', x(r.d));
+        hd.attr('cx', x(r.d)).attr('cy', (s) => y(r[s.k]));
+        const tip = NZ.tip(el);
+        NZ.tipFill(tip, fd(r.d), series.map((s) => ({color: s.color, label: s.label, value: NZ.f.pct1(r[s.k])})));
+        NZ.tipAt(el, tip, x(r.d), py);
+      })
+      .on('pointerleave', () => {
+        hover.style('display', 'none');
+        NZ.tipHide(el);
+      });
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const NZ = window.NZ;
+  const fi = d3.format('.0f');
+
+  dash.draw('seats', (el) => {
+    if (!NZ.gate(el, ['eday'])) return;
+    const rows = NZ.rows('eday').map((r) => ({...r, mid: +r.seats_mid, lo: +r.seats_lo, hi: +r.seats_hi}))
+      .filter((r) => isFinite(r.mid) && isFinite(r.lo) && isFinite(r.hi) && r.hi > 0)
+      .sort((a, b) => b.mid - a.mid || b.hi - a.hi);
+    const W = Math.max(280, el.clientWidth || 0), rowH = 30, mt = 4, mb = 26, H = mt + rows.length * rowH + mb;
+    el.style.minHeight = H + 'px';
+    el.replaceChildren();
+    if (!rows.length) return;
+    const narrow = W < 480;
+    rows.forEach((r) => {
+      r.lab = narrow ? (r.short || r.party) : (r.name || r.party);
+      r.txt = `${fi(r.mid)} (${fi(r.lo)}–${fi(r.hi)})`;
+    });
+    const svg = NZ.svg(el, W, H);
+    const nw = NZ.textW(svg, rows.map((r) => r.lab), 'lbl');
+    const vw = NZ.textW(svg, rows.map((r) => r.txt), 'lbl-m');
+    const ml = Math.ceil(d3.max(nw)) + 16, mr = Math.ceil(d3.max(vw)) + 16;
+    const x = d3.scaleLinear([0, d3.max(rows, (r) => r.hi) || 10], [ml, W - mr]).nice();
+    const xt = x.ticks(Math.max(2, Math.floor((W - ml - mr) / 60)));
+    svg.append('g').selectAll('line').data(xt).join('line')
+      .attr('x1', (t) => x(t)).attr('x2', (t) => x(t)).attr('y1', mt).attr('y2', H - mb).style('stroke', 'var(--cds-chart-grid)');
+    const ax = svg.append('g').attr('transform', `translate(0,${H - mb})`).call(d3.axisBottom(x).tickValues(xt).tickFormat(fi).tickSizeOuter(0));
+    NZ.axisStyle(ax);
+    ax.select('.domain').remove();
+    NZ.thin(svg.node(), ax.selectAll('text').nodes());
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${mt + i * rowH + rowH / 2})`);
+    g.append('text').attr('class', 'lbl').attr('x', ml - 12).attr('dy', '0.32em').attr('text-anchor', 'end').text((r) => r.lab);
+    g.append('rect').attr('x', (r) => x(r.lo)).attr('y', -5).attr('width', (r) => Math.max(2, x(r.hi) - x(r.lo))).attr('height', 10).attr('rx', 5)
+      .style('fill', (r) => NZ.C[r.party] || '#888').style('opacity', 0.3);
+    g.append('circle').attr('cx', (r) => x(r.mid)).attr('r', 6).style('fill', (r) => NZ.C[r.party] || '#888');
+    g.append('text').attr('class', 'lbl-m').attr('x', W - mr + 10).attr('dy', '0.32em').text((r) => r.txt);
+    g.append('rect').attr('x', 0).attr('y', -rowH / 2).attr('width', W).attr('height', rowH).style('fill', 'transparent')
+      .on('pointermove', (ev, r) => {
+        const tip = NZ.tip(el);
+        const lines = [{color: NZ.C[r.party] || '#888', label: 'Seats', value: r.txt}];
+        if (r.vote_mid != null && isFinite(+r.vote_mid)) lines.push({label: 'Party vote', value: `${NZ.f.share(r.vote_mid)} (${NZ.f.dec1(r.vote_lo)}–${NZ.f.dec1(r.vote_hi)})`});
+        NZ.tipFill(tip, r.name || r.party, lines);
+        const [px, py] = NZ.local(el, ev);
+        NZ.tipAt(el, tip, px, py);
+      })
+      .on('pointerleave', () => NZ.tipHide(el));
+  });
+
+  dash.draw('bloc', (el) => {
+    if (!NZ.gate(el, ['summary'])) return;
+    const S = NZ.summary();
+    const side = el.dataset.side === 'left' ? 'left' : 'right';
+    const mid = +S[side + '_mid'], lo = +S[side + '_lo'], hi = +S[side + '_hi'], maj = +S.maj_mid;
+    const oppAll = +S.opp_mid || 0;
+    const opp = side === 'left' ? oppAll : 0;
+    el.replaceChildren();
+    if (![mid, lo, hi, maj].every((v) => isFinite(v))) return;
+    const W = Math.max(280, el.clientWidth || 0), H = 46;
+    const top = d3.max([+S.right_hi, +S.left_hi + oppAll, +S.left_mid + oppAll, maj].filter((v) => isFinite(v))) || 70;
+    const tR = fi(+S.right_mid);
+    const tL = `${fi(+S.left_mid)} + ${fi(oppAll)} TOP`;
+    const svg = NZ.svg(el, W, H);
+    const mr = Math.ceil(d3.max(NZ.textW(svg, [tR, tL], 'lbl'))) + 14;
+    const x = d3.scaleLinear([0, top * 1.04], [0, W - mr]);
+    const color = side === 'left' ? NZ.C.LAB : NZ.C.NAT;
+    svg.append('rect').attr('x', 0).attr('y', 6).attr('width', Math.max(0, x(mid))).attr('height', 20).attr('rx', 3).style('fill', color);
+    if (opp > 0) svg.append('rect').attr('x', x(mid) + 1).attr('y', 6).attr('width', Math.max(0, x(mid + opp) - x(mid) - 1)).attr('height', 20).attr('rx', 3)
+      .style('fill', NZ.C.OPP).style('opacity', 0.65);
+    svg.append('line').attr('x1', x(lo)).attr('x2', x(hi)).attr('y1', 36).attr('y2', 36).style('stroke', 'var(--color-fg-muted)');
+    [lo, hi].forEach((v) => svg.append('line').attr('x1', x(v)).attr('x2', x(v)).attr('y1', 32).attr('y2', 40).style('stroke', 'var(--color-fg-muted)'));
+    svg.append('line').attr('x1', x(maj)).attr('x2', x(maj)).attr('y1', 0).attr('y2', H).style('stroke', 'var(--color-fg)').attr('stroke-dasharray', '4 3');
+    svg.append('text').attr('class', 'lbl').attr('x', W - mr + 10).attr('y', 16).attr('dy', '0.32em').text(side === 'left' ? tL : tR);
+    svg.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', H).style('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const tip = NZ.tip(el);
+        const lines = [{color, label: 'Most likely', value: `${fi(mid)} seats`}, {label: 'Range', value: `${fi(lo)}–${fi(hi)}`}];
+        if (opp > 0) lines.push({color: NZ.C.OPP, label: 'Opportunity adds', value: fi(opp)});
+        lines.push({label: 'Majority', value: fi(maj)});
+        NZ.tipFill(tip, 'Seats', lines);
+        const [px, py] = NZ.local(el, ev);
+        NZ.tipAt(el, tip, px, py);
+      })
+      .on('pointerleave', () => NZ.tipHide(el));
+  });
+
+  dash.draw('parl', (el) => {
+    if (!NZ.gate(el, ['parliament', 'summary'])) return;
+    const rows = NZ.rows('parliament').map((r) => ({n: +r.seats, p: +r.chance})).filter((r) => isFinite(r.n) && isFinite(r.p)).sort((a, b) => a.n - b.n);
+    const med = +NZ.summary().total_mid;
+    el.replaceChildren();
+    if (!rows.length) return;
+    const W = Math.max(280, el.clientWidth || 0), H = 200, mt = 8, mb = 26;
+    const fp = d3.format('.0%');
+    const y0 = d3.scaleLinear([0, d3.max(rows, (r) => r.p) || 0.1], [0, 1]).nice();
+    const yt = y0.ticks(3);
+    const svg = NZ.svg(el, W, H);
+    const ml = Math.ceil(d3.max(NZ.textW(svg, yt.map(fp), 'tick')) || 24) + 11;
+    const x = d3.scaleBand(rows.map((r) => r.n), [ml, W - 4]).padding(0.2);
+    const y = d3.scaleLinear(y0.domain(), [H - mb, mt]);
+    svg.append('g').selectAll('line').data(yt).join('line')
+      .attr('x1', ml).attr('x2', W - 4).attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).style('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(yt).join('text').attr('class', 'tick')
+      .attr('x', ml - 8).attr('y', (t) => y(t)).attr('dy', '0.32em').attr('text-anchor', 'end').text(fp);
+    const bw = x.bandwidth();
+    svg.append('g').selectAll('rect').data(rows).join('rect')
+      .attr('x', (r) => x(r.n)).attr('y', (r) => y(r.p)).attr('width', bw).attr('height', (r) => Math.max(0, H - mb - y(r.p)))
+      .attr('rx', Math.min(3, bw / 2))
+      .style('fill', (r) => (r.n === med ? dash.colors[0] : 'var(--cds-chart-muted)'))
+      .on('pointermove', (ev, r) => {
+        const tip = NZ.tip(el);
+        NZ.tipFill(tip, `${fi(r.n)} seats`, [{label: 'Chance', value: NZ.f.pct1(r.p)}]);
+        const [px, py] = NZ.local(el, ev);
+        NZ.tipAt(el, tip, px, py);
+      })
+      .on('pointerleave', () => NZ.tipHide(el));
+    const ax = svg.append('g').attr('transform', `translate(0,${H - mb})`).call(d3.axisBottom(x).tickFormat(fi).tickSizeOuter(0));
+    NZ.axisStyle(ax);
+    NZ.thin(svg.node(), ax.selectAll('text').nodes());
+  });
+})();
+</script>

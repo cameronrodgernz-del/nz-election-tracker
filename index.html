@@ -151,7 +151,7 @@
 
     <div class="nz-card" id="maori">
       <h2>Māori electorates</h2>
-      <p class="nz-note">Chance each party wins the seat. No seat polls are published here, so these are the tracker's own judgement from the 2023 results, this year's candidates and local reporting, moved together with Te Pāti Māori's party vote.</p>
+      <p class="nz-note">Chance each party wins the seat, from the Whakaata Māori–Curia seat polls taken between late September and mid October and the news since, moved together with Te Pāti Māori's party vote. In Tāmaki Makaurau, Labour's Kerrin Leoni quit as the party's candidate on 23 October after the poll had her two points behind Oriini Kaipara; her name stays on the ballot.</p>
       <div class="nz-tw">
         <table class="nz-t t-maori" data-source="maori" data-row-key="seat">
           <thead><tr><th data-field="seat">Electorate</th><th data-field="TPM" data-fmt="pct">Te Pāti Māori</th><th data-field="LAB" data-fmt="pct">Labour</th><th data-field="GRN" data-fmt="pct">Greens</th><th data-field="TTT" data-fmt="pct">Te Tai Tokerau Party</th><th data-field="IND" data-fmt="pct">Independent</th></tr></thead>
@@ -162,10 +162,10 @@
 
     <div class="nz-card" id="close-seats">
       <h2>General electorates in play</h2>
-      <p class="nz-note">Seats where National's chance of winning is between <span data-draw="k" data-k="close_lo" data-fmt="pct">—</span> and <span data-draw="k" data-k="close_hi" data-fmt="pct">—</span>. Each starts from its 2023 result and moves with the swing between National and Labour; a published local poll is blended in.</p>
+      <p class="nz-note">Seats where National's chance of winning is between <span data-draw="k" data-k="close_lo" data-fmt="pct">—</span> and <span data-draw="k" data-k="close_hi" data-fmt="pct">—</span>. Each starts from who would have won it in 2023 on this year's boundaries, allows for MPs standing down, and moves with the swing between National and Labour; a published local poll is blended in. Tāmaki is National against ACT now Brooke van Velden has stood down.</p>
       <div class="nz-tw">
         <table class="nz-t t-close" data-source="close_seats" data-row-key="seat">
-          <thead><tr><th data-field="seat">Electorate</th><th data-field="held_2023">Won in 2023 by</th><th data-field="national_chance" data-fmt="pct">National's chance</th><th data-field="local_poll">Local poll</th></tr></thead>
+          <thead><tr><th data-field="seat">Electorate</th><th data-field="held_2023">2023 winner, new boundaries</th><th data-field="national_chance" data-fmt="pct">National's chance</th><th data-field="local_poll">Local poll</th></tr></thead>
           <tbody data-draw="rows"></tbody>
         </table>
       </div>
@@ -214,14 +214,14 @@
     <div class="nz-card" id="how">
       <h2>How the tracker works</h2>
       <ol class="nz-steps">
-        <li><h3>Every poll goes in</h3><p>All published party-vote polls since the 2023 election: 1News-Verian, RNZ-Reid Research, Taxpayers' Union-Curia, Roy Morgan, Talbot Mills, The Post-Freshwater and Anacta. A poll is placed at the middle of its fieldwork, and bigger samples count for a little more.</p></li>
+        <li><h3>Every poll goes in</h3><p>All published party-vote polls since the 2023 election: 1News-Verian, RNZ-Reid Research, Taxpayers' Union-Curia, Roy Morgan, The Post-Freshwater and Anacta (Talbot Mills until it was renamed in September). A poll is placed at the middle of its fieldwork, and bigger samples count for a little more.</p></li>
         <li><h3>Each pollster's lean comes out</h3><p>Every pollster runs a little high or low for some parties. The tracker measures each one against the others over the past 16 months, with recent polls counting more, and takes it out. The middle is set mainly by 1News-Verian, RNZ-Reid Research and Curia, with the others counting for a little less, so no single pollster decides where the line sits.</p></li>
         <li><h3>One line per party</h3><p>Each party's support is treated as something that drifts from day to day. The tracker draws the line that best fits every poll at once, and how fast a party's support has really been moving decides how hard one new poll can pull the line. The band shows how sure it is.</p></li>
         <li><h3>Allowing for the polls being wrong together</h3><p>In 2017, 2020 and 2023 the final polls as a group missed some parties by a few points, and the Greens tended to poll above their result. The election-day estimates build in misses of that size, shared by every pollster, plus a small correction for the Greens. A miss for National tends to come with the opposite miss for Labour.</p></li>
         <li><h3>Running the election</h3><p>The tracker then runs the election <span data-draw="n" data-source="summary" data-field="value" data-where="metric=simulations" data-fmt="int">—</span> times. Each run draws a party vote for every party, settles the electorates, applies the <span data-draw="k" data-k="threshold" data-fmt="share0">—</span> threshold (a party that wins an electorate is in regardless), shares out the seats with the Sainte-Laguë formula the Electoral Commission uses, and keeps any overhang seats.</p></li>
-        <li><h3>Electorates</h3><p>Each general electorate starts from its 2023 result and moves with the national swing between National and Labour, with room for local surprises. Where a local poll has been published (Hutt South, Ōtaki, Waitaki, West Coast-Tasman, Mount Albert, Auckland Central) it is blended in. Auckland Central is treated as National against the Greens. The Māori electorates use the tracker's own judgement, since no seat polls are published there.</p></li>
+        <li><h3>Electorates</h3><p>Each general electorate starts from who would have won it in 2023 on the new boundaries drawn in 2025, using The Tally Room's estimates where they are published and the tracker's own estimates for the two new Wellington seats, Kapiti and Kenepuru. A party whose MP is standing down loses about two points, and National MPs first elected in 2023 get a smaller lift. Each seat then moves with the national swing between National and Labour, with room for local surprises. Where a local poll has been published (Hutt South, Kapiti, Waitaki, West Coast-Tasman, Mount Albert, Auckland Central) it is blended in. Auckland Central is treated as National against the Greens, and Tāmaki as National against ACT. The Māori electorates follow the Whakaata Māori–Curia seat polls and the news since.</p></li>
         <li><h3>Who can govern</h3><p>National, ACT and NZ First are counted as one side; Labour, the Greens and Te Pāti Māori as the other. Luxon and Peters have both ruled out working with Opportunity, so on stated positions Opportunity can only help Hipkins. The second view relaxes that: Opportunity talks first to whichever of National and Labour has more seats. The third view is the first with National's extra electorate seats taken away, to show how much rides on them.</p></li>
-        <li><h3>What it cannot see</h3><p>A late swing after the last polls, a big change in who turns out, and coalition talks that break from what the leaders have said. The electorate part is the simplest piece: it works from 2023 margins, and the redrawn boundaries for this election move some seats in ways it only roughly allows for.</p></li>
+        <li><h3>What it cannot see</h3><p>A late swing after the last polls, a big change in who turns out, and coalition talks that break from what the leaders have said. The electorate part is the simplest piece: most seats have no poll, so they rest on the 2023 result and the national swing, and that drives how many extra seats National is likely to win.</p></li>
       </ol>
     </div>
     <div class="nz-card" id="sources">
@@ -229,6 +229,8 @@
       <ul class="nz-links">
         <li><a href="https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_New_Zealand_general_election" target="_blank" rel="noopener">Opinion polling for the 2026 New Zealand general election</a>, checked against each pollster's release as reported by 1News, RNZ, The Post, the Taxpayers' Union, Roy Morgan and Talbot Mills.</li>
         <li><a href="https://www.electionresults.govt.nz/electionresults_2023/" target="_blank" rel="noopener">2023 general election official results</a>, Electoral Commission.</li>
+        <li><a href="https://www.tallyroom.com.au/62140" target="_blank" rel="noopener">New Zealand's new electoral map</a>, The Tally Room, for the 2023 results worked out on the 2025 boundaries.</li>
+        <li>Whakaata Māori–Curia polls of the Māori electorates, September and October 2026, as reported by The Spinoff.</li>
         <li>Market prices from the Polymarket and Kalshi market pages, on the date shown against each.</li>
       </ul>
     </div>

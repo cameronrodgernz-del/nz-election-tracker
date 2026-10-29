@@ -4,7 +4,7 @@ import json, os, datetime as dt
 D = json.load(open("data.json"))
 os.makedirs("out", exist_ok=True)
 POLLSTER = {"Verian": "1News-Verian", "Reid": "RNZ-Reid Research", "Curia": "Taxpayers' Union-Curia",
-            "Roy Morgan": "Roy Morgan", "Talbot Mills": "Talbot Mills", "Freshwater": "Post-Freshwater", "Anacta": "Anacta"}
+            "Roy Morgan": "Roy Morgan", "Freshwater": "Post-Freshwater", "Anacta": "Anacta (was Talbot Mills)"}
 NAMES = {"NAT": "National", "LAB": "Labour", "GRN": "Greens", "NZF": "NZ First", "ACT": "ACT",
          "OPP": "Opportunity", "TPM": "Te Pāti Māori", "TTT": "Te Tai Tokerau Party", "IND": "Independent", "OTH": "Others"}
 SHOW = ["NAT", "LAB", "GRN", "NZF", "ACT", "OPP", "TPM"]
@@ -127,13 +127,14 @@ for seat, probs in D["maori"].items():
 maori.sort(key=lambda r: -r["TPM"])
 dump("maori", maori)
 
-SEAT_NAMES = {"Otaki / Kapiti": "Ōtaki / Kāpiti", "Kaikoura": "Kaikōura", "Rangitikei": "Rangitīkei", "Taupo": "Taupō",
+SEAT_NAMES = {"Kaikoura": "Kaikōura", "Rangitikei": "Rangitīkei", "Taupo": "Taupō",
               "Whangaparaoa": "Whangaparāoa", "Whangarei": "Whangārei", "Mangere": "Māngere",
-              "Panmure-Otahuhu": "Panmure-Ōtāhuhu", "Ohariu": "Ōhāriu", "Te Atatu": "Te Atatū"}
-HELD = {"Mount Albert": "Labour", "Nelson": "Labour", "Te Atatu": "Labour", "Ohariu": "Labour", "Taieri": "Labour",
-        "Wigram": "Labour", "Christchurch Central": "Labour", "Christchurch East": "Labour", "Palmerston North": "Labour",
-        "Auckland Central": "Greens"}
-POLLED = {"Hutt South": "Labour +12 (Sept poll)", "Otaki / Kapiti": "Labour +4 (July poll)", "Waitaki": "National +23 (Sept poll)",
+              "Otahuhu": "Ōtāhuhu", "Waitakere": "Waitākere", "Tamaki": "Tāmaki"}
+# Who would have won each seat in 2023 on this year's boundaries
+HELD = {"Mount Albert": "Labour", "Nelson": "Labour", "Taieri": "Labour", "Christchurch Central": "Labour",
+        "Christchurch East": "Labour", "Palmerston North": "Labour", "Waitakere": "Labour", "Kenepuru": "Labour",
+        "Glendene": "Labour", "Auckland Central": "Greens", "Tamaki": "ACT"}
+POLLED = {"Hutt South": "Labour +12 (Sept poll)", "Kapiti": "Labour +4 (July poll)", "Waitaki": "National +23 (Sept poll)",
           "West Coast-Tasman": "National +6 (Sept poll)", "Mount Albert": "Labour +1 to +5 (Sept–Oct polls)",
           "Auckland Central": "National +5 over Greens (July poll)"}
 close = []
