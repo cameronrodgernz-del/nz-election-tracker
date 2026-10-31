@@ -6,7 +6,7 @@
   "traded_usd": 114914,
   "counted": "No",
   "reason": "US$115k traded, with about a 4-cent gap between buy and sell prices",
-  "checked": "2026-10-31"
+  "checked": "2026-11-01"
  },
  {
   "market": "Which coalition forms the next government",
@@ -15,7 +15,7 @@
   "traded_usd": 71200,
   "counted": "No",
   "reason": "US$71k traded, with about an 8-cent gap between buy and sell prices",
-  "checked": "2026-10-31"
+  "checked": "2026-11-01"
  },
  {
   "market": "Party with the most seats",
@@ -23,8 +23,8 @@
   "reading": "National 54%, Labour 45%",
   "traded_usd": 96341,
   "counted": "No",
-  "reason": "US$96k traded, too thin to be a real price",
-  "checked": "2026-10-30"
+  "reason": "US$96k traded, with about a 4-cent gap between buy and sell prices",
+  "checked": "2026-11-01"
  },
  {
   "market": "Party with the most seats",
@@ -33,7 +33,7 @@
   "traded_usd": 9546,
   "counted": "No",
   "reason": "Only about US$10k traded, too thin to be a real price",
-  "checked": "2026-10-31"
+  "checked": "2026-11-01"
  },
  {
   "market": "General election winner",
