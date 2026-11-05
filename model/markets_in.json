@@ -2,38 +2,38 @@
  {
   "market": "Next prime minister",
   "venue": "Polymarket (prediction market)",
-  "reading": "Hipkins 51%, Luxon 48%",
-  "traded_usd": 158529,
+  "reading": "Hipkins 57%, Luxon 38%",
+  "traded_usd": 184081,
   "counted": "No",
-  "reason": "US$159k traded, below the US$250,000 needed, and the Luxon buy and sell prices are about 6 cents apart",
-  "checked": "2026-11-05"
+  "reason": "US$184k traded, below the US$250,000 needed (buy and sell prices are now within about 2 cents)",
+  "checked": "2026-11-06"
  },
  {
   "market": "Which coalition forms the next government",
   "venue": "Polymarket (prediction market)",
-  "reading": "National + ACT + NZ First 48%, Labour + Greens + Te Pāti Māori 30%",
-  "traded_usd": 76810,
+  "reading": "National + ACT + NZ First 47%, Labour + Greens + Te Pāti Māori 30%",
+  "traded_usd": 78400,
   "counted": "No",
-  "reason": "US$77k traded, below the US$250,000 needed, with about a 2-cent gap between buy and sell prices",
-  "checked": "2026-11-05"
+  "reason": "US$78k traded, below the US$250,000 needed",
+  "checked": "2026-11-06"
  },
  {
   "market": "Party with the most seats",
   "venue": "Polymarket (prediction market)",
-  "reading": "National 71%, Labour 26%",
-  "traded_usd": 143330,
+  "reading": "National 67%, Labour 33%",
+  "traded_usd": 179800,
   "counted": "No",
-  "reason": "US$143k traded, with about a 3-cent gap between buy and sell prices",
-  "checked": "2026-11-05"
+  "reason": "US$180k traded, below the US$250,000 needed",
+  "checked": "2026-11-06"
  },
  {
   "market": "Party with the most seats",
   "venue": "Kalshi (prediction market)",
-  "reading": "National 69%, Labour 26%",
-  "traded_usd": 9735,
+  "reading": "National 69%, Labour 30%",
+  "traded_usd": 10609,
   "counted": "No",
-  "reason": "Only about US$10k traded, too thin to be a real price",
-  "checked": "2026-11-05"
+  "reason": "Only about US$11k traded, too thin to be a real price",
+  "checked": "2026-11-06"
  },
  {
   "market": "General election winner",
